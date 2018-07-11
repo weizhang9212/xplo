@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import MarkerClusterer from '@google/markerclusterer'
 
 const MarkersHandler = (props) =>{
-    function stopBubble(e) {
-        if ( e && e.stopPropagation )
-            e.stopPropagation();
-        else
-            window.event.cancelBubble = true;
-    }
+    const dream = [
+
+    ];
+
     // round counter 
     let roundIndex = 0;
     // markers we have
@@ -15,7 +13,8 @@ const MarkersHandler = (props) =>{
     const google = props.google;
     let preMark = null;
     //'mousemove click mouseup mousedown keydown keypress keyup submit change mouseenter scroll resize dblclick'
-    document.getElementsByClassName("App")[0].addEventListener('mousedown', actionMade);
+    document.getElementsByClassName("App")[0].addEventListener('touchmove', actionMade);
+    document.getElementsByClassName("App")[0].addEventListener('click', actionMade);
     let cluster = null;
 
     function actionMade(){
@@ -30,34 +29,14 @@ const MarkersHandler = (props) =>{
                 content: `<h3>${location.photo_title}</h3>
                 <img height = 100 px width = 80 px src = "${location.photo_file_url}"/>`
          });
-         // image
-         var image = {
-            url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-            // This marker is 20 pixels wide by 32 pixels high.
-            size: new google.maps.Size(20, 32),
-            // The origin for this image is (0, 0).
-            origin: new google.maps.Point(0, 0),
-            // The anchor for this image is the base of the flagpole at (0, 32).
-            anchor: new google.maps.Point(0, 32)
-          };
-         //
-        
+
+         //  custom marker
         let marker = new google.maps.OverlayView();
         let myLatlng = new google.maps.LatLng(location.latitude,location.longitude);
         marker.likes = Math.ceil(Math.random()*10);  
         marker.latlng = myLatlng;
         marker.map = props.map;
         marker.args = {};
-
-
-        //  const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
-        //     position: {lat: location.latitude, lng: location.longitude}, // sets position of marker to specified location
-        //     map: props.map, // sets markers to appear on the map we just created on line 35
-        //     title: location.photo_title,
-        //     icon: image,
-        //     url:"sdfasdf",
-        //     className: "test class"
-        // });
         
         // custom marker  shown as html
 
@@ -88,6 +67,7 @@ const MarkersHandler = (props) =>{
                     div.dataset.marker_id = self.args.marker_id;
                 }
                 
+                // show info click
                 google.maps.event.addDomListener(div, "click", function(event) {
                     if(preMark !== null ){
                     preMark.infowindow.close();
@@ -96,17 +76,22 @@ const MarkersHandler = (props) =>{
                     preMark = marker;		
                     google.maps.event.trigger(self, "click");
                 });
+
+                // long press function
+
+                // start to press marker
                 let pressTimer;
-                google.maps.event.addDomListener(div, "mousedown", function(event){
+                google.maps.event.addDomListener(div, "touchstart", function(event){
                     pressTimer = setTimeout(()=>{
                         if(cluster){
                             cluster.clearTimer();
                         }
-                        console.log("mouseUp Long Press");
+                        props.map.getBounds().extend();
                     },2000);
                 });
-
-                google.maps.event.addDomListener(div, "mouseup", function(event){
+                
+                // press end
+                google.maps.event.addDomListener(div, "touchend", function(event){
                     clearTimeout(pressTimer);
                     if(cluster){
                         cluster.activeTimer();
@@ -118,6 +103,7 @@ const MarkersHandler = (props) =>{
                 panes.overlayImage.appendChild(div);
             }
             
+            // set the position of div
             var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
             
             if (point) {
@@ -142,19 +128,7 @@ const MarkersHandler = (props) =>{
         /*    end of custom marker        */
 
 
-        // marker.addListener('click', ()=> { 
 
-        //     if(preMark !== null ){
-        //       preMark.infowindow.close();
-        //     }
-        //     infowindow.open(props.map, marker);
-        //     window.setTimeout(function() {
-        //       marker.setAnimation(null);
-        //     }, 700);
-        //     marker.setAnimation(google.maps.Animation.BOUNCE); 
-        //     preMark = marker;
-        //     console.log(this);
-        //   });
         markers.push(marker);
         })
 

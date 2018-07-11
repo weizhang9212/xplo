@@ -8,7 +8,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import React from 'react';
 const styles = {
     root: {
-      width: 500
+      width: '100%'
     },
   };
   
