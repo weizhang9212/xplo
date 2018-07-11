@@ -1,3 +1,4 @@
+
 // ==ClosureCompiler==
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // @externs_url http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/maps/google_maps_api_v3_3.js
@@ -77,20 +78,6 @@ function MarkerClusterer(map, opt_markers, opt_options) {
    */
   this.markers_ = [];
 
-  
-
-  // markers in current range
-  this.curMarkers_ = [];
-
-  // interval 
-  this.postShow = null;
-
-  // previous shown post
-  this.preShow = null;
-
-  // round index 
-  this.roundIndex = 0;
-
   /**
    *  @type {Array.<Cluster>}
    */
@@ -116,8 +103,6 @@ function MarkerClusterer(map, opt_markers, opt_options) {
    * @private
    */
   this.gridSize_ = options['gridSize'] || 60;
-
-  this.holdMarker = null;
 
   /**
    * @private
@@ -179,8 +164,6 @@ function MarkerClusterer(map, opt_markers, opt_options) {
 
   // Add the map event listeners
   var that = this;
-  this.timer = null;
-  var active = true;
   google.maps.event.addListener(this.map_, 'zoom_changed', function() {
     // Determines map type and prevent illegal zoom levels
     var zoom = that.map_.getZoom();
@@ -188,15 +171,11 @@ function MarkerClusterer(map, opt_markers, opt_options) {
     var maxZoom = Math.min(that.map_.maxZoom || 100,
                          that.map_.mapTypes[that.map_.getMapTypeId()].maxZoom);
     zoom = Math.min(Math.max(zoom,minZoom),maxZoom);
-    
-    // time out for round show
-    that.actionMade();
+
     if (that.prevZoom_ != zoom) {
       that.prevZoom_ = zoom;
       that.resetViewport();
     }
-
-
   });
 
   google.maps.event.addListener(this.map_, 'idle', function() {
@@ -216,36 +195,6 @@ function MarkerClusterer(map, opt_markers, opt_options) {
  * @type {string}
  * @private
  */
-
-MarkerClusterer.prototype.actionMade = function(){
-  if(this.timer) {
-    clearTimeout(this.timer);
-  }
-  if(this.preShow)
-    this.preShow.infowindow.close();
-  clearInterval(this.postShow);
-  this.timer = setTimeout(function(){
-    this.clearInfo();
-    this.roundInfoShow();
-  },4000);
-}
-
-MarkerClusterer.prototype.clearTimer = function(){
-  if(this.timer){
-    clearTimeout(this.timer);
-  }
-}
-
-MarkerClusterer.prototype.activeTimer = function(){
-  this.actionMade();
-}
-
-MarkerClusterer.prototype.clearInfo = function(){
-  for(var i = 0; i < this.curMarkers_.length; i++){
-    this.curMarkers_[i].infowindow.close();
-  }
-}
-
 MarkerClusterer.prototype.MARKER_CLUSTER_IMAGE_PATH_ = '../images/m';
 
 
@@ -837,12 +786,12 @@ MarkerClusterer.prototype.addToClosestCluster_ = function(marker) {
  * Creates the clusters.
  *
  * @private
- *  set visibility for dom
  */
 MarkerClusterer.prototype.createClusters_ = function() {
   if (!this.ready_) {
     return;
   }
+
   // Get our current map view bounds.
   // Create a new bounds object so we don't affect the map.
   var mapBounds = new google.maps.LatLngBounds(this.map_.getBounds().getSouthWest(),
@@ -854,35 +803,8 @@ MarkerClusterer.prototype.createClusters_ = function() {
       this.addToClosestCluster_(marker);
     }
   }
-  this.curMarkers_ = [];
-  for(var i = 0; i < this.clusters_.length; i++){
-    markerArr = this.clusters_[i].markers_;
-    for(var j = 0; j < markerArr.length; j++){
-      this.curMarkers_.push(markerArr[j]);
-    }
-  }
-  console.log(this.curMarkers_);
-  //this.roundIndex = 0;
-
 };
 
-MarkerClusterer.prototype.roundInfoShow = function(){
-  if(this.curMarkers_.length ===0) {
-    return;
-  }
-  this.postShow = setInterval(function(){
-    if(this.curMarkers_.length ===0) {
-        return;
-    }
-    var index = this.roundIndex % (this.curMarkers_.length);
-    this.curMarkers_[index].infowindow.open(this.map_, this.curMarkers_[index]);
-    if(this.preShow !== null){
-        this.preShow.infowindow.close();
-    }
-    this.preShow = this.curMarkers_[index];
-    this.roundIndex += 1;
-  },3000);
-}
 
 /**
  * A cluster that contains markers.
@@ -911,7 +833,6 @@ function Cluster(markerClusterer) {
  * @param {google.maps.Marker} marker The marker to check.
  * @return {boolean} True if the marker is already added.
  */
-
 Cluster.prototype.isMarkerAlreadyAdded = function(marker) {
   if (this.markers_.indexOf) {
     return this.markers_.indexOf(marker) != -1;
@@ -1127,7 +1048,6 @@ function ClusterIcon(cluster, styles, opt_padding) {
   this.center_ = null;
   this.map_ = cluster.getMap();
   this.div_ = null;
-  this.sumDiv = null;
   this.sums_ = null;
   this.visible_ = false;
 
@@ -1140,7 +1060,7 @@ function ClusterIcon(cluster, styles, opt_padding) {
  */
 ClusterIcon.prototype.triggerClusterClick = function() {
   var markerClusterer = this.cluster_.getMarkerClusterer();
-  //console.log(this.cluster_);
+
   // Trigger the clusterclick event.
   google.maps.event.trigger(markerClusterer.map_, 'clusterclick', this.cluster_);
 
@@ -1156,13 +1076,11 @@ ClusterIcon.prototype.triggerClusterClick = function() {
  * @ignore
  */
 ClusterIcon.prototype.onAdd = function() {
-  var markerClusterer = this.cluster_.getMarkerClusterer();
-  //console.log(this.cluster_.getMarkers());
   this.div_ = document.createElement('DIV');
   if (this.visible_) {
     var pos = this.getPosFromLatLng_(this.center_);
     this.div_.style.cssText = this.createCss(pos);
-    this.div_.innerHTML = "<div>"+ this.cluster_.getMarkers().length.toString()+"</div>";
+    this.div_.innerHTML = this.sums_.text;
   }
 
   var panes = this.getPanes();
@@ -1261,8 +1179,7 @@ ClusterIcon.prototype.setSums = function(sums) {
   this.text_ = sums.text;
   this.index_ = sums.index;
   if (this.div_) {
-    //this.div_.innerHTML = sums.text;
-    //this.div_.innerHTML = "my test";
+    this.div_.innerHTML = sums.text;
   }
 
   this.useStyle();
