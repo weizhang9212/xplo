@@ -9,20 +9,16 @@ export class MapContainer extends Component {
     componentWillMount(){
       console.log(data);
       this.setState({locations : data.photos.slice(0,100)})
+      this.setState({dreamLocations : data.photos.slice(200,220)});
     }
     state = {
         zoom : 15,
         locations: [
             
           ],
-          newPost :{
-            name: "place the title here",
-            location: {
-              lat: 40,
-              lng: -100,
-            },
-            url: null
-          }
+        dreamLocations:[
+
+        ],
     }
     
   render() {
@@ -32,7 +28,8 @@ export class MapContainer extends Component {
     }
     return (
       <MapDrawer google={this.props.google} 
-                    locations = {this.state.locations}>
+                    locations = {this.state.locations}
+                    dream = {this.state.dreamLocations}>
 
       </MapDrawer>
                     

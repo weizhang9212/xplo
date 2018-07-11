@@ -117,7 +117,7 @@ export default class MapDrawer extends Component {
   
       return ( // in our return function you must return a div with ref='map' and style.
       <div id = "map">
-        <MarkersHandler map = {this.state.map} locations = {this.props.locations} google = {this.props.google}/>
+        <MarkersHandler map = {this.state.map} locations = {this.props.locations} google = {this.props.google} dream = {this.props.dream}/>
         <div ref="map" style={style}>
           loading map...
         </div>
