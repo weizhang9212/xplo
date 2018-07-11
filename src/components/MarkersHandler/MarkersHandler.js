@@ -97,7 +97,6 @@ const MarkersHandler = (props) =>{
                     google.maps.event.trigger(self, "click");
                 });
                 let pressTimer;
-<<<<<<< HEAD
                 google.maps.event.addDomListener(div, "mousedown", function(event){
                     pressTimer = setTimeout(()=>{
                         if(cluster){
@@ -113,14 +112,6 @@ const MarkersHandler = (props) =>{
                         cluster.activeTimer();
                     }
                     console.log(cluster);
-=======
-                google.maps.event.addDomListener(div, "mouseup", function(event){
-                    console.log("mouseUp");
-                });
-
-                google.maps.event.addDomListener(div, "mousedown", function(event){
-                    console.log("mouseDown");
->>>>>>> 8fad15c1b4ae672e8c7d475086f51acc89b2c053
                 });
                 
                 var panes = this.getPanes();

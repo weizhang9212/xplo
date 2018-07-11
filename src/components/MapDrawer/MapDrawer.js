@@ -100,12 +100,8 @@ export default class MapDrawer extends Component {
         const mapConfig = Object.assign({}, {
           center: {lat: 40.7485722, lng: -74.0068633}, // sets center of google map to NYC.
           zoom: 10, // sets zoom. Lower numbers are zoomed further out.
-<<<<<<< HEAD
           mapTypeId: 'roadmap',
           gestureHandling: 'greedy' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
-=======
-          mapTypeId: 'roadmap' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
->>>>>>> 8fad15c1b4ae672e8c7d475086f51acc89b2c053
         })
         this.map = new maps.Map(node, mapConfig); 
         this.setState({map : this.map});
