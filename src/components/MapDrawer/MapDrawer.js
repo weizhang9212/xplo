@@ -8,7 +8,10 @@ export default class MapDrawer extends Component {
       ],
       preMark: null,
       google: null,
-      map : null
+      map : null,
+      postShow : false,
+      loadDone :false,
+      click : false
     }
     preMark = null;
     componentWillMount(){
@@ -51,6 +54,10 @@ export default class MapDrawer extends Component {
     }
     zoomMove(){
       this.getGeo(this.map);
+    }
+
+    changeState(){
+      this.setState({click:true});
     }
 
     // calculate correct zoom using bound and mapDim
@@ -105,12 +112,12 @@ export default class MapDrawer extends Component {
         })
         this.map = new maps.Map(node, mapConfig); 
         this.setState({map : this.map});
+        this.setState({loadDone : true});
       }
   
     }
   
     render() {
-      console.log("render");
       const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
         width: '100%', // 90vw basically means take up 90% of the width screen. px also works.
         height: '75vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
@@ -118,7 +125,15 @@ export default class MapDrawer extends Component {
   
       return ( // in our return function you must return a div with ref='map' and style.
       <div id = "map">
-        <MarkersHandler map = {this.state.map} locations = {this.props.locations} google = {this.props.google} dream = {this.props.dream}/>
+        { this.state.loadDone ?
+        <MarkersHandler map = {this.state.map} 
+        locations = {this.props.locations} 
+        google = {this.props.google} 
+        dream = {this.props.dream} 
+        postShow = {this.change} 
+        click = {this.state.click}/>
+          : null
+        }
         <div ref="map" style={style}>
           loading map...
         </div>
@@ -126,6 +141,7 @@ export default class MapDrawer extends Component {
         <button onClick = {this.zoomIn.bind(this)}> zoomIn</button>
         <button onClick = {this.zoomMove.bind(this)}> move</button>
         <button onClick = {this.zoomChange.bind(this,0,21)}> zoomChange</button>
+        <button onClick = {this.changeState.bind(this)}>test</button>
       </div>
       )
     }
