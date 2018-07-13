@@ -10,6 +10,7 @@
     "axios": "^0.16.2",
     "google-maps-react": "^2.0.2",
     "material-ui": "^0.20.1",
+    "oridomi": "^1.1.2",
     "prop-types": "^15.6.2",
     "react": "^16.2.0",
     "react-dom": "^16.4.1",
