@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MarkerClusterer from '@google/markerclusterer'
 import PostShow from '../PostShow/PostShow'
+import './MarkersHandler.css'
 import OriDomi from 'oridomi'
 
 export default class MarkersHandler extends Component{
@@ -66,7 +67,7 @@ export default class MarkersHandler extends Component{
         };
         // NOTE: google.maps.OverlayView is only defined once the Maps API has
         // loaded. That is why Popup is defined inside initMap().
-        Popup.prototype = Object.create(google.maps.OverlayView.prototype);
+        Popup.prototype = Object.create(this.props.google.maps.OverlayView.prototype);
 
         /** Called when the popup is added to the map. */
         Popup.prototype.onAdd = function() {
@@ -151,7 +152,7 @@ export default class MarkersHandler extends Component{
 
                 //custom marker shown as html
                 marker.popup = popup;
-                popup.setMap(props.map);
+                popup.setMap(this.props.map);
                 popup.hide();
 
                 marker.draw = function() {
@@ -182,9 +183,9 @@ export default class MarkersHandler extends Component{
                             }
 
                             //
-                            that.cluster.clearTimer();
-                            let show = that.state.postShow;
-                            that.setState({postShow : !show});
+                            // that.cluster.clearTimer();
+                            // let show = that.state.postShow;
+                            // that.setState({postShow : !show});
                             //
 
                             popup.show();
@@ -267,12 +268,7 @@ export default class MarkersHandler extends Component{
         
         console.log("render");
         return(
-        <div>{this.state.postShow? 
-          <PostShow google={this.props.google}
-                    map = {this.props.map}
-                    />  : 
-            null}
-        <button id = "test" >oridomi test</button>    
+        <div>
         </div>
     );
     }
