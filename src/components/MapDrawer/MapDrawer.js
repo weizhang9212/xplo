@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import MarkersHandler from '../MarkersHandler/MarkersHandler'
-
+import { Route, Link } from 'react-router-dom';
 export default class MapDrawer extends Component {
     state = {
       locations: [
@@ -57,6 +57,7 @@ export default class MapDrawer extends Component {
     }
 
     changeState(){
+      this.render();
       this.setState({click:true});
     }
 
@@ -131,12 +132,16 @@ export default class MapDrawer extends Component {
         google = {this.props.google} 
         dream = {this.props.dream} 
         postShow = {this.change} 
-        click = {this.state.click}/>
+        click = {this.state.click}
+        toProfile = {this.props.toProfile}
+        toPost = {this.props.toPost}/>
           : null
         }
         <div ref="map" style={style}>
           loading map...
         </div>
+        <li><Link to="/profile/1">Profile</Link></li>
+        <li><Link to="/">Home</Link></li>
         <button onClick = {this.zoomOut.bind(this)}> zoomOut</button>
         <button onClick = {this.zoomIn.bind(this)}> zoomIn</button>
         <button onClick = {this.zoomMove.bind(this)}> move</button>

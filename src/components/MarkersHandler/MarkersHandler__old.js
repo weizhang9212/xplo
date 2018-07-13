@@ -120,7 +120,7 @@ const MarkersHandler = (props) =>{
                 div.style.top = (point.y - 20) + 'px';
             }
             marker.div = div;
-        };
+        }
         
         marker.remove = function() {
             if (this.div) {

@@ -21,7 +21,15 @@ export class MapContainer extends Component {
         ],
     }
     
+    routeToProfile(id){
+        this.props.history.push('/profile/' + id);
+    }
+
+    routeToPost(id){
+      this.props.history.push('/post/' + id);
+    }
   render() {
+    console.log(this.props);
     const style = {
       width: '100%',
       height: '90%'
@@ -29,8 +37,10 @@ export class MapContainer extends Component {
     return (
       <MapDrawer google={this.props.google} 
                     locations = {this.state.locations}
-                    dream = {this.state.dreamLocations}>
-
+                    dream = {this.state.dreamLocations}
+                    toProfile = {this.routeToProfile.bind(this)}
+                    toPost = {this.routeToPost.bind(this)}
+                    >
       </MapDrawer>
                     
     );
