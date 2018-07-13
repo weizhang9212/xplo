@@ -76,7 +76,7 @@ export default class MarkersHandler extends Component{
           /** Called when the popup is removed from the map. */
         Popup.prototype.onRemove = function() {
             if (this.anchor.parentElement) {
-              this.anchor.parentElement.removeChild(this.anchor);
+                this.anchor.parentElement.removeChild(this.anchor);
             }
         };
           /** Called when the popup needs to draw itself. */
@@ -102,29 +102,28 @@ export default class MarkersHandler extends Component{
         };
 
         Popup.prototype.hide = function() {
-          if (this.anchor) {
-            // The visibility property must be a string enclosed in quotes.
-            this.anchor.style.visibility = 'hidden';
-          }
+            if (this.anchor) {
+                // The visibility property must be a string enclosed in quotes.
+                this.anchor.style.visibility = 'hidden';
+            }
         };
 
         Popup.prototype.show = function() {
-          if (this.anchor) {
-            this.anchor.style.visibility = 'visible';
-          }
+            if (this.anchor) {
+                this.anchor.style.visibility = 'visible';
+            }
         };
           /** Stops clicks/drags from bubbling up to the map. */
         Popup.prototype.stopEventPropagation = function() {
             var anchor = this.anchor;
             anchor.style.cursor = 'auto';
-
             ['click', 'dblclick', 'contextmenu', 'wheel', 'mousedown', 'touchstart',
              'pointerdown']
-                .forEach(function(event) {
-                  anchor.addEventListener(event, function(e) {
+            .forEach(function(event) {
+                    anchor.addEventListener(event, function(e) {
                     e.stopPropagation();
-                  });
-                });
+                    });
+            });
         };
         if(this.state.map != null){
             const google = this.props.google;
@@ -261,9 +260,6 @@ export default class MarkersHandler extends Component{
         if(this.cluster === null) return;
         this.cluster.actionMade();
     }
-
-
-    
 
 
     
