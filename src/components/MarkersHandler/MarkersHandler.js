@@ -138,14 +138,12 @@ export default class MarkersHandler extends Component{
                 postImg.className = 'postImg'
                 postImg.src = location.photo_file_url;
                 postImg.width = 80;
-<<<<<<< HEAD
+
                 postImg.height = '100';
                 postImg.addEventListener('click', function(){
                     that.props.toPost(location.photo_id);
                 })
-=======
                 postImg.height = 100;
->>>>>>> 30c32bff1183cb8b0ef271013b9ecd06eb1698d5
                 contentString.appendChild(postImg);
                 popup = new Popup(new google.maps.LatLng(location.latitude,location.longitude), contentString);//
 
