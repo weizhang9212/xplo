@@ -141,7 +141,7 @@ export default class MarkersHandler extends Component{
 
                 postImg.height = '100';
                 postImg.addEventListener('click', function(){
-                    that.props.toPost(location.photo_id);
+                    that.props.toPost(location.photo_id+111);
                 })
                 postImg.height = 100;
                 contentString.appendChild(postImg);
