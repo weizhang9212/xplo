@@ -28,6 +28,10 @@ project.xcworkspace
 .gradle
 local.properties
 
+# VScode
+#
+.vscode/
+
 # node.js
 #
 node_modules/
@@ -36,4 +40,4 @@ npm-debug.log
 buck-out/
 \.buckd/
 android/app/libs
-android/keystores/debug.keystore
+android/keystores/debug.keystore 
