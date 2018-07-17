@@ -116,13 +116,28 @@ class Profile extends Component {
         return this.state.showMap !== nextState.showMap;
     }
 
+    routeToProfile(id){
+        this.props.history.push('/profile/' + id);
+    }
+
+    routeToPost(id){
+      this.props.history.push('/post/' + id);
+    }
+
     
     render() {
         const { classes } = this.props;
-        let show = <MapList locations = {this.state.locations}/>;
+        let show = <MapList 
+                    locations = {this.state.locations}
+                    toProfile = {this.routeToProfile.bind(this)}
+                    toPost = {this.routeToPost.bind(this)}
+                    />;
         if(this.state.showMap === false){
             console.log(false);
-            show = <ViewList locations = {this.state.locations}/>
+            show = <ViewList locations = {this.state.locations}
+                             toProfile = {this.routeToProfile.bind(this)}
+                             toPost = {this.routeToPost.bind(this)}
+                             />
         }
 
         console.log("render");
