@@ -17,6 +17,7 @@
 }
 #comments :hover {
     animation-play-state: paused;
+    background-color: yellow;
 }
 @keyframes comments {
     0%   { transform: translate(0, 0); }
