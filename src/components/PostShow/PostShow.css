@@ -5,18 +5,20 @@
     line-height: 20px;
     background-color: white;
     color: Black;
-
     overflow: hidden;
-    box-sizing: border-box;
+
 }
 #comments ul {
     display: inline-block;
     padding-top: 10%;
+
     animation: comments 40s linear infinite;
 
 }
 #comments :hover {
     animation-play-state: paused;
+    overflow: show;
+    background-color: yellow;
 }
 @keyframes comments {
     0%   { transform: translate(0, 0); }
