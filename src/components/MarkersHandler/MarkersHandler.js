@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MarkerClusterer from '@google/markerclusterer'
-import PostShow from '../PostShow/PostShow'
 import './MarkersHandler.css'
 import OriDomi from 'oridomi'
 
