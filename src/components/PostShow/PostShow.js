@@ -75,7 +75,7 @@ function HomeIcon(props) {
 var allComment = "";
 
 function AddComments(item, index) {
-  console.log(allComment);
+  //console.log(allComment);
   var slice = item.user_id + ":  "+ item.user_comment;
   if (slice.length >= 50) {
     slice = slice.slice(0,50) + "\n"+slice.slice(50,slice.length);
@@ -119,7 +119,7 @@ class PostShow extends Component {
   render() {
     const { classes } = this.props;
     var DraftComment = fakeData.review.forEach(AddComments);
-    console.log(" markers will mount " + DraftComment);
+    //console.log(" markers will mount " + DraftComment);
     //const {owner_name} = this.state.owner_name;
     return (
       <div>
@@ -153,7 +153,6 @@ class PostShow extends Component {
             </center>
           </CardContent>
           <div id="comments" >
-          
            <ul>
             {fakeData.review.map(review => (
             <li style = {{color: 'blue'}}> 
@@ -161,8 +160,7 @@ class PostShow extends Component {
                 <span style = {{color: 'black'}}> 
                 : {review.user_comment}
                 </span>
-            </li>
-             
+            </li>            
             ))}
            </ul>
           </div>
