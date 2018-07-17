@@ -20,26 +20,7 @@ export default class MarkersHandler extends Component{
         this.loadMarkers();
     }
 
-<<<<<<< HEAD
     componentWillUpdate(){
-=======
-    if(props.map !== null){
-        props.locations.forEach( location => {
-            let infowindow = new google.maps.InfoWindow({
-                content: `<h3>${location.photo_title}</h3>
-                <img height = 100 px width = 80 px src = "${location.photo_file_url}"/>`
-         });
-
-         //  custom marker
-        let marker = new google.maps.OverlayView();
-        let myLatlng = new google.maps.LatLng(location.latitude,location.longitude);
-        marker.likes = Math.ceil(Math.random()*10);  
-        marker.latlng = myLatlng;
-        marker.map = props.map;
-        marker.args = {imgUrl:location.photo_file_url};
-        
-        // custom marker  shown as html
->>>>>>> master
 
     }
 
@@ -173,12 +154,10 @@ export default class MarkersHandler extends Component{
                 marker.map = this.state.map;
                 marker.args = {};
 
-<<<<<<< HEAD
                 //custom marker shown as html
                 marker.popup = popup;
                 popup.setMap(this.props.map);
                 popup.hide();
-=======
         let markerClusterer = new MarkerClusterer(props.map, markers, {
             maxZoom: 15,
             gridSize: 55,
@@ -188,7 +167,6 @@ export default class MarkersHandler extends Component{
             // imagePath: 'https://robohash.org/set_set4/bgset_bg1/'
           });
           cluster = markerClusterer;
->>>>>>> master
 
                 marker.draw = function() {
                     var self = this;              
