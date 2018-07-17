@@ -36,7 +36,7 @@ const MarkersHandler = (props) =>{
         marker.likes = Math.ceil(Math.random()*10);  
         marker.latlng = myLatlng;
         marker.map = props.map;
-        marker.args = {};
+        marker.args = {imgUrl:location.photo_file_url};
         
         // custom marker  shown as html
 
@@ -135,10 +135,11 @@ const MarkersHandler = (props) =>{
 
         let markerClusterer = new MarkerClusterer(props.map, markers, {
             maxZoom: 15,
-            gridSize: 20,
+            gridSize: 55,
             style:10,
             optimized:false,
             imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            // imagePath: 'https://robohash.org/set_set4/bgset_bg1/'
           });
           cluster = markerClusterer;
 
