@@ -155,7 +155,7 @@ class PostShow extends Component {
           <div id="comments" >
           
            <ul>
-           // {fakeData.review.map(review => (
+            {fakeData.review.map(review => (
             <li style = {{color: 'blue'}}> 
                 {review.user_id}
                 <span style = {{color: 'black'}}> 
