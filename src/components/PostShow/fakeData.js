@@ -2,7 +2,7 @@ var fakeData = {
  "photo_title": "Wheatfield in afternoon light",
  "detail": "Hey guys! Checkout this beautiful place!",
  "review": [{"user_id": "shadowplayer", "user_comment": "What a nice place!"},
- {"user_id": "shadowplayer", "user_comment": "Please Adjust your fan art accordingly﻿"},
+ {"user_id": "shadowplayer2", "user_comment": "Please Adjust your fan art accordingly﻿"},
  {"user_id": "Hail Whydra", "user_comment": "He's got the best anti-aging cream﻿"},
  {"user_id": "Van Hendrix", "user_comment": "Ashes is old enough to drive but not enough to retire"},
  {"user_id": "Hexa Coyerrr", "user_comment": "Ash is secretly the ultimate life form﻿"},
