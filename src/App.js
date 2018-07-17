@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PageWrapper from './containers/PageWrapper/PageWrapper'
+import { BrowserRouter } from 'react-router-dom'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <BrowserRouter>
+       <div className="App">
         <PageWrapper></PageWrapper>
-      </div>
+       </div>
+      </BrowserRouter>
     );
   }
 }

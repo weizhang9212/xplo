@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import MarkersHandler from '../MarkersHandler/MarkersHandler'
-
+import { Route, Link } from 'react-router-dom';
 export default class MapDrawer extends Component {
     state = {
       locations: [
       ],
       preMark: null,
       google: null,
-      map : null
+      map : null,
+      postShow : false,
+      loadDone :false,
+      click : false
     }
     preMark = null;
     componentWillMount(){
@@ -51,6 +54,11 @@ export default class MapDrawer extends Component {
     }
     zoomMove(){
       this.getGeo(this.map);
+    }
+
+    changeState(){
+      this.render();
+      this.setState({click:true});
     }
 
     // calculate correct zoom using bound and mapDim
@@ -104,28 +112,56 @@ export default class MapDrawer extends Component {
           gestureHandling: 'greedy' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
         })
         this.map = new maps.Map(node, mapConfig); 
+        let bounds = new google.maps.LatLngBounds();
+        if(this.props.person){
+          console.log("fit");
+          this.props.locations.forEach(location => {
+            let place = new google.maps.LatLng(location.latitude,location.longitude);
+            bounds.extend(place);
+          });
+          this.map.fitBounds(bounds);
+        }
         this.setState({map : this.map});
+        this.setState({loadDone : true});
       }
   
     }
   
     render() {
-      console.log("render");
       const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
         width: '100%', // 90vw basically means take up 90% of the width screen. px also works.
         height: '75vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
       }
+      if(this.props.person){
+        style.width = '100%',
+        style.height = '50vh'
+      }
   
       return ( // in our return function you must return a div with ref='map' and style.
       <div id = "map">
-        <MarkersHandler map = {this.state.map} locations = {this.props.locations} google = {this.props.google} dream = {this.props.dream}/>
+        { this.state.loadDone ?
+        <MarkersHandler map = {this.state.map} 
+        locations = {this.props.locations} 
+        google = {this.props.google} 
+        dream = {this.props.dream} 
+        postShow = {this.change} 
+        click = {this.state.click}
+        toProfile = {this.props.toProfile}
+        toPost = {this.props.toPost}
+        person = {this.props.person}
+        />
+          : null
+        }
         <div ref="map" style={style}>
           loading map...
         </div>
+        <li><Link to="/profile/1">Profile</Link></li>
+        <li><Link to="/">Home</Link></li>
         <button onClick = {this.zoomOut.bind(this)}> zoomOut</button>
         <button onClick = {this.zoomIn.bind(this)}> zoomIn</button>
         <button onClick = {this.zoomMove.bind(this)}> move</button>
         <button onClick = {this.zoomChange.bind(this,0,21)}> zoomChange</button>
+        <button onClick = {this.changeState.bind(this)}>test</button>
       </div>
       )
     }
