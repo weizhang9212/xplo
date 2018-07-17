@@ -112,6 +112,15 @@ export default class MapDrawer extends Component {
           gestureHandling: 'greedy' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
         })
         this.map = new maps.Map(node, mapConfig); 
+        let bounds = new google.maps.LatLngBounds();
+        if(this.props.person){
+          console.log("fit");
+          this.props.locations.forEach(location => {
+            let place = new google.maps.LatLng(location.latitude,location.longitude);
+            bounds.extend(place);
+          });
+          this.map.fitBounds(bounds);
+        }
         this.setState({map : this.map});
         this.setState({loadDone : true});
       }
@@ -122,6 +131,10 @@ export default class MapDrawer extends Component {
       const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
         width: '100%', // 90vw basically means take up 90% of the width screen. px also works.
         height: '75vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
+      }
+      if(this.props.person){
+        style.width = '100%',
+        style.height = '50vh'
       }
   
       return ( // in our return function you must return a div with ref='map' and style.
@@ -134,7 +147,9 @@ export default class MapDrawer extends Component {
         postShow = {this.change} 
         click = {this.state.click}
         toProfile = {this.props.toProfile}
-        toPost = {this.props.toPost}/>
+        toPost = {this.props.toPost}
+        person = {this.props.person}
+        />
           : null
         }
         <div ref="map" style={style}>
