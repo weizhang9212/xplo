@@ -19,28 +19,38 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import fakeData from './fakeData.js'
+import fakeData from './fakeData.js';
 import { Route, Link } from 'react-router-dom';
 
-import './PostShow.css'
+import './PostShow.css';
 
-
+import classNames from 'classnames';
+import { Divider } from '@material-ui/core';
 const styles = theme => ({
+  header: {
+    padding: 0,
+    margin: 0,
+  },
+  content: {
+    padding: 0,
+  },
   card: {
     width: '100%', // 90vw basically means take up 90% of the width screen. px also works.
     height: '75vh'
   },
   media: {
-    height: '19%',
-    paddingTop: '40%', // 16:9
-    width: '60%',
-    marginLeft: '20%',
+    height: '70%',
+    paddingTop: '0', // 16:9
+    width: '100%',
+    marginLeft: '0',
     borderRadius: 10,
     border: 0,
     boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
   },
   actions: {
     display: 'flex',
+    paddingTop: '3%',
+    height: '5%',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -55,6 +65,7 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+
   icon: {
     margin: theme.spacing.unit * 2,
   },
@@ -64,6 +75,16 @@ const styles = theme => ({
       color: red[800],
     },
   },
+  liked: {
+    color: red[500],
+  },
+  unliked: {
+
+  },
+  likedPeople: {
+    color: '#41a3f4',
+    height: '80%',
+  }
 });
 function HomeIcon(props) {
   return (
@@ -92,75 +113,134 @@ class PostShow extends Component {
             img : null,
             date: null,
             owner_name: null,
-            expanded: false 
+            like: false,
+            likes: 0, 
+            expand: false,
         }
 
-        // componentDidMount(){
+        componentDidMount(){
             
-        //     this.setState(
-        //         {
-        //         title:       fakeData.photo_title,
-        //         postDetail : fakeData.detail,
-        //         postReview : fakeData.review,
-        //         img :        fakeData.photo_file_url,
-        //         date:        fakeData.upload_date,
-        //         owner_name:  fakeData.owner_name
-        //         }
-        //     );
-        //     console.log(" markers will mount " + fakeData.owner_name);
-        //      //var title=fakeData.photo_title;
-        // }
+            this.setState(state => (
+                {
+                title:       fakeData.photo_title,
+                postDetail : fakeData.detail,
+                postReview : fakeData.review,
+                img :        fakeData.photo_file_url,
+                date:        fakeData.upload_date,
+                owner_name:  fakeData.owner_name,
+                expand: false,
+                like: false,
+                likes: fakeData.likes,
+                }
+            ));
+            console.log(" markers will mount " + this.state.likes);
+             //var title=fakeData.photo_title;
+        }
 
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
-  };
+        likeClick = () => {
+          if (this.state.like){
+            this.setState(state => ({ like: false }));
+            this.setState(state => ({ likes: this.state.likes - 1 }));
+          }else{
+            this.setState(state => ({ like: true }));
+            this.setState(state => ({ likes: this.state.likes + 1}));
+          }
 
+        }
+
+        handleExpandClick = () => {
+          this.setState(state => ({ expanded: !state.expanded }));
+        };
+
+  // commentClick = () => {
+  //   var commentPop = document.getElementById("commentPanel");
+  //   commentPop.classList.toggle("show");
+  // };
 
   render() {
     const { classes } = this.props;
-    var DraftComment = fakeData.review.forEach(AddComments);
+    var likes = fakeData.likes;
     //console.log(" markers will mount " + DraftComment);
     //const {owner_name} = this.state.owner_name;
     return (
       <div>
         <Card className={classes.card}>
-          <CardHeader
+          <CardHeader className={classes.header}
             avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
+              <Avatar component={Link} to={"/profile/:id" + fakeData.owner_id} aria-label="avatar" className={classes.avatar} 
+              style ={{ width: '30px',
+                        height: '30px',
+                        marginRight: 0,
+                        textDecoration: 'none'}}>
                 {fakeData.owner_name.slice(0,1)}
               </Avatar>
             }
             action={
-              <IconButton button component={Link} to="/">
+              <IconButton component={Link} to="/">
               
-                <HomeIcon className={classes.icon}/> 
+                <HomeIcon className={classes.iconHover}style={{ fontSize: 30, paddingRight: 10 }}/> 
               </IconButton>             
             }
-            title={fakeData.photo_title}
-            subheader={fakeData.upload_date}
+            title={<span style={{lineHeight: 0, fontSize: '0.75rem',color: '#41c4f4'}}>{fakeData.photo_title}</span>}
+            subheader={<span style={{lineHeight: 0, fontSize: '0.75rem'}}>{fakeData.upload_date}</span>}
           />
-          
+          <a href= {fakeData.photo_file_url}>
           <CardMedia
             className={classes.media}
             image={fakeData.photo_file_url}
-            title="Contemplative Reptile"
+            src = "picture"
           />
-          <CardContent>
-          <center>
-            <Typography component="p">
-              {fakeData.detail}                 
-            </Typography> 
+          </a>
+          <CardActions className={classes.actions} disableActionSpacing ={true}>
+            <IconButton onClick = {this.likeClick}
+                        className= {classNames(
+                          {[classes.unliked]: this.state.like === false},  
+                          {[classes.liked]: this.state.like === true,})} 
+                        aria-label="Add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton aria-label="Share">
+              <ShareIcon />
+            </IconButton>
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded,
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </CardActions>
+          <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography paragraph variant="body2">
+                Method:
+              </Typography>
+            </CardContent>
+          </Collapse>
+          <Divider/>
+          <CardContent className = {classes.content}>
+            <center>
+              <Typography component="p" id = "details">
+                <span id = "text"><b>{fakeData.detail}</b></span>                 
+              </Typography> 
             </center>
           </CardContent>
-          <div id="comments" >
-           <ul>
+          <div id = 'likedPeople'>
+              <FavoriteIcon className = {classes.likedPeople}/>
+              <span style ={{fontSize: '0.75rem',color: '#41a3f4'}}><b>{this.state.likes} likes</b></span>
+          </div>
+          <div className ="comments">
+           <ul id="commentPanel">
             {fakeData.review.map(review => (
-            <li style = {{color: 'blue'}}> 
+            <span style = {{fontSize: '0.8rem',color: '#41a3f4'}}> 
                 {review.user_id}
-                <span style = {{color: 'black'}}> 
-                : {review.user_comment}
-                </span>
-            </li>            
+              <span style = {{fontSize: '0.8rem',color: '#bac1bc'}}> 
+               : {review.user_comment}<br/>  
+              </span>
+            </span>          
             ))}
            </ul>
           </div>
@@ -177,7 +257,6 @@ PostShow.propTypes = {
 export default withStyles(styles)(PostShow);
 
 
-
-// {allComment.split("\n").map((i,key) => {
-//              return <p key = {key}>{i} </p>;
-//              })}
+           // <span className = "popuptext" id = "mypopup">
+           //  popup test!
+           // </span>
