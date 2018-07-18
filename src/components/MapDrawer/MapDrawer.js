@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import MarkersHandler from '../MarkersHandler/MarkersHandler'
 import { Route, Link } from 'react-router-dom';
+import Progress from '../Progress/Progress'
 export default class MapDrawer extends Component {
     state = {
       locations: [
@@ -121,6 +122,7 @@ export default class MapDrawer extends Component {
           });
           this.map.fitBounds(bounds);
         }
+        this.map.setOptions({minZoom: 2});
         this.setState({map : this.map});
         this.setState({loadDone : true});
       }
@@ -130,7 +132,7 @@ export default class MapDrawer extends Component {
     render() {
       const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
         width: '100%', // 90vw basically means take up 90% of the width screen. px also works.
-        height: '75vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
+        height: '80vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
       }
       if(this.props.person){
         style.width = '100%',
@@ -155,13 +157,13 @@ export default class MapDrawer extends Component {
         <div ref="map" style={style}>
           loading map...
         </div>
-        <li><Link to="/profile/1">Profile</Link></li>
-        <li><Link to="/">Home</Link></li>
-        <button onClick = {this.zoomOut.bind(this)}> zoomOut</button>
+        {/* <li><Link to="/profile/1">Profile</Link></li>
+        <li><Link to="/">Home</Link></li> */}
+        {/* <button onClick = {this.zoomOut.bind(this)}> zoomOut</button>
         <button onClick = {this.zoomIn.bind(this)}> zoomIn</button>
         <button onClick = {this.zoomMove.bind(this)}> move</button>
         <button onClick = {this.zoomChange.bind(this,0,21)}> zoomChange</button>
-        <button onClick = {this.changeState.bind(this)}>test</button>
+        <button onClick = {this.changeState.bind(this)}>test</button> */}
       </div>
       )
     }
