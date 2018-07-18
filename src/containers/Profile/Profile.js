@@ -197,15 +197,15 @@ class Profile extends Component {
                                     <Grid container className={classes.likes}>
                                         <Grid item xs={4}>
                                             <p className="number">500</p>
-                                            <p className="type">posts</p>
+                                            <p className="numberType">posts</p>
                                         </Grid>
                                         <Grid item xs={4}>
                                             <p className="number">500</p>
-                                            <p className="type">fellowers</p>
+                                            <p className="numberType">fellowers</p>
                                         </Grid>
                                         <Grid item xs={4}>
                                             <p className="number">500</p>
-                                            <p className="type">fellowing</p>
+                                            <p className="numberType">fellowing</p>
                                         </Grid>
                                     </Grid>
 

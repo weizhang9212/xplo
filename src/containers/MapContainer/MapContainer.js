@@ -32,10 +32,12 @@ export class MapContainer extends Component {
     console.log(this.props);
     const style = {
       width: '100%',
-      height: '90%'
+      height: '80vh'
     }
     return (
-      <MapDrawer google={this.props.google} 
+      <MapDrawer    className = "map"
+                    style = {style}
+                    google={this.props.google} 
                     locations = {this.state.locations}
                     dream = {this.state.dreamLocations}
                     toProfile = {this.routeToProfile.bind(this)}

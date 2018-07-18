@@ -3,9 +3,11 @@
     font-weight : 600;
 }
 
-.type{
+.numberType{
     font-weight : 200;
     font-family  :  monospace;
+    margin-top: -8px;
+    color: gray;
 }
 
 .location{
@@ -18,9 +20,6 @@
 }
 
 
-.type{
-    margin-top: -8px
-}
 
 
 .top{
@@ -33,7 +32,7 @@
 
 .name{
     margin : 0;
-    margin-top:-10px;
+    margin-top:-25px;
     margin-left: 7%;
     position: relative;
     top: -10px;
@@ -54,6 +53,7 @@
 }
 
 .mid{
+    margin-top : -10px;
     clear: 'both';
     height : 9vh;
     background-color: #FAFAFA;
