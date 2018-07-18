@@ -1,26 +1,40 @@
 
-#comments {
+.comments {
+    position: relative;
     max-width: 600px;
+    height: 100px;
     flex-direction: column;
     line-height: 20px;
     background-color: white;
     color: Black;
     overflow: hidden;
-
+    cursor: pointer;
 }
-#comments ul {
+.comments ul {
     display: inline-block;
     padding-top: 10%;
 
     animation: comments 40s linear infinite;
 
 }
-#comments :hover {
+/*.comments :hover {
     animation-play-state: paused;
     overflow: show;
-    background-color: yellow;
-}
+}*/
 @keyframes comments {
     0%   { transform: translate(0, 0); }
     100% { transform: translate(0, -100%); }
 }
+
+#details {
+    text-align: left;
+}
+
+#text {
+    font-size: 0.75rem;
+}
+
+#likedPeople {
+    height: 4%;
+}
+

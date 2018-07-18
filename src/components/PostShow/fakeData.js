@@ -1,6 +1,7 @@
 var fakeData = { 
  "photo_title": "Wheatfield in afternoon light",
  "detail": "Hey guys! Checkout this beautiful place!",
+ "likes" : 66,
  "review": [{"user_id": "shadowplayer", "user_comment": "What a nice place!"},
  {"user_id": "shadowplayer2", "user_comment": "Please Adjust your fan art accordingly﻿"},
  {"user_id": "Hail Whydra", "user_comment": "He's got the best anti-aging cream﻿"},

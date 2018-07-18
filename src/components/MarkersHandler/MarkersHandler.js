@@ -160,18 +160,11 @@ export default class MarkersHandler extends Component {
                 marker.popup = popup;
                 popup.setMap(this.props.map);
                 popup.hide();
-                // let markerClusterer = new MarkerClusterer(this.props.map, markers, {
-                //     maxZoom: 15,
-                //     gridSize: 55,
-                //     style: 10,
-                //     optimized: false,
-                //     imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-                //     // imagePath: 'https://robohash.org/set_set4/bgset_bg1/'
-                // });
-                // cluster = markerClusterer;
 
-                marker.draw = function () {
-                    var self = this;
+
+
+                marker.draw = function() {
+                    var self = this;              
                     var div = this.div;
                     let like = marker.likes;
                     if (!div) {
