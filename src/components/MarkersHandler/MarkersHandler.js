@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MarkerClusterer from '@google/markerclusterer'
+import MarkerClusterer from '@google/markerclusterer/src/markerclusterer.js'
 import './MarkersHandler.css'
 import OriDomi from 'oridomi'
 
