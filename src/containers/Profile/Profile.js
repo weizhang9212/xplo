@@ -4,18 +4,31 @@ import { Route, Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+
+
 import red from '@material-ui/core/colors/red'
 import brown from '@material-ui/core/colors/brown'
-import RoomIcon from '@material-ui/icons/Room';
-import Viewlist from '@material-ui/icons/ViewList'
-import Maplist from '@material-ui/icons/Map'
+import gray from '@material-ui/core/colors/grey'
+import pink from '@material-ui/core/colors/pink'
 
+
+import RoomIcon from '@material-ui/icons/Room';
+import Viewlist from '@material-ui/icons/Dehaze'
+import Maplist from '@material-ui/icons/CenterFocusWeak'
+import PersonAdd from '@material-ui/icons/PersonAdd'
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
+import AppList from '@material-ui/icons/Apps'
+
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import ViewList from './ViewList/ViewList'
+import GridList from './GridList/GridList';
+import MapList from './MapList/MapList';
+import SingleList from './SingleList/SingleList'
 
 import './Profile.css'
-import MapList from './MapList/MapList';
 
 
 const styles = {
@@ -24,49 +37,35 @@ const styles = {
         justifyContent: 'center'
     },
 
-    top: {
-        clear: 'both',
-        height: '25%',
-        backgroundColor: brown[400],
-    },
     avatar: {
-        margin: 10
+        marginLeft: '20%',
+        marginTop: '25%'
     },
     bigAvatar: {
-        border: 'solid 4px #D7CCC8',
-        width: 60,
-        height: 60,
+        // border: 'solid 5px black',
+        width: 80,
+        height: 80,
+    },
+    Avatar: {
+        marginLeft: '35%',
+        marginBottom: '10px'
     },
 
-
-    floater: {
-        
-        width: '50%',
-        // marginTop: '10%',
+    likes: {
+        marginTop: '10%',
+        textAlign: 'center'
     },
-
-
-    stay: {
-        marginTop: "-20px"
+    pinkAvatar: {
+        marginLeft: '35%',
+        marginBottom: '10px',
+        color: '#fff',
+        backgroundColor: pink[500],
     },
-    
-    icon: {
-        height: 20,
-        width: 20,
-        marginTop: '10px',
-        color: red[500]
-    },
-    pages: {
-        width: '100%',
-        flexGrow: 1,
-        height: '10vh',
-        backgroundColor: '#EA4335',
-    },
-    choise: {
-        paddingTop: '5%',
-        width: '100%',
-        heigth: '100%'
-    },
+    choises: {
+        clear: 'both',
+        height: '8vh',
+        backgroundColor: gray[10],
+    }
 
 };
 
@@ -100,81 +99,176 @@ class Profile extends Component {
             { "photo_id": 298967, "photo_title": "Antelope Canyon, Ray of Light", "photo_url": "http://www.panoramio.com/photo/298967", "photo_file_url": "http://mw2.google.com/mw-panoramio/photos/medium/298967.jpg", "longitude": -111.407890, "latitude": 36.894037, "width": 500, "height": 375, "upload_date": "04 January 2007", "owner_id": 64388, "owner_name": "Artusi", "owner_url": "http://www.panoramio.com/user/64388" }
 
         ],
-        showMap : false,
+        showMap: false,
+        add: false,
+        like: false,
+        viewValue: "gridView"
     }
 
-    mapShow=()=>{
-        this.setState({showMap : true});
+    mapShow = () => {
+        this.setState({ showMap: true });
     }
 
-    mapClose=()=>{
-        this.setState({showMap : false});
+    mapClose = () => {
+        this.setState({ showMap: false });
     }
 
-    shouldComponentUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState) {
 
-        return this.state.showMap !== nextState.showMap;
+        return this.state.showMap !== nextState.showMap ||
+            this.state.like !== nextState.like ||
+            this.state.add !== nextState.add ||
+            this.state.viewValue !== nextState.viewValue;
     }
 
-    routeToProfile(id){
+    routeToProfile(id) {
         this.props.history.push('/profile/' + id);
     }
 
-    routeToPost(id){
-      this.props.history.push('/post/' + id);
+    routeToPost(id) {
+        this.props.history.push('/post/' + id);
     }
 
-    
+    personLike = () => {
+        console.log("personlike");
+        let likeTmp = !this.state.like;
+        this.setState({ like: likeTmp });
+    }
+
+    personAdd = () => {
+        console.log("person add");
+        let addTmp = !this.state.add;
+        this.setState({ add: addTmp });
+        console.log(this.state.add);
+    }
+
+    handleChange = (event, value) => {
+        let tmp = value;
+        this.setState({ viewValue: value });
+    };
+
+
     render() {
+        console.log("render");
         const { classes } = this.props;
-        let show = <MapList 
-                    locations = {this.state.locations}
-                    toProfile = {this.routeToProfile.bind(this)}
-                    toPost = {this.routeToPost.bind(this)}
-                    />;
-        if(this.state.showMap === false){
-            console.log(false);
-            show = <ViewList locations = {this.state.locations}
-                             toProfile = {this.routeToProfile.bind(this)}
-                             toPost = {this.routeToPost.bind(this)}
-                             />
+        let show = <GridList locations={this.state.locations}
+            toProfile={this.routeToProfile.bind(this)}
+            toPost={this.routeToPost.bind(this)}
+        />
+        if (this.state.viewValue === "mapView") {
+            show = <MapList
+                locations={this.state.locations}
+                toProfile={this.routeToProfile.bind(this)}
+                toPost={this.routeToPost.bind(this)}
+            />
         }
 
-        console.log("render");
+        if (this.state.viewValue === "listView") {
+            show = <SingleList
+                locations={this.state.locations}
+                toProfile={this.routeToProfile.bind(this)}
+                toPost={this.routeToPost.bind(this)}
+            />
+        }
 
+        // let show = <MapList
+        //     locations={this.state.locations}
+        //     toProfile={this.routeToProfile.bind(this)}
+        //     toPost={this.routeToPost.bind(this)}
+        // />;
+        // if (this.state.showMap === false) {
+        //     console.log(false);
+        //     show = <ViewList locations={this.state.locations}
+        //         toProfile={this.routeToProfile.bind(this)}
+        //         toPost={this.routeToPost.bind(this)}
+        //     />
+        // }
         return (
 
             <div>
                 <div>
-                    <div className={classNames(classes.row, classes.top)}>
-                        <div className={classes.floater}>
-                            <div className={classes.row}>
-                                <Avatar alt="Remy Sharp" className={classNames(classes.avatar, classes.bigAvatar)} src="http://www.imgworlds.com/wp-content/uploads/2015/12/18-CONTACTUS-HEADER.jpg" />
-                            </div>
-                            <div className={classNames(classes.row, classes.stay)}>
-                                <p>Test Profile</p>
-                            </div>
-                            <div className={classNames(classes.row, classes.stay)}>
-                                <RoomIcon className={classes.icon} />
-                                <p className="location">
-                                    Los Angeles
-                                </p>
-                            </div>
+                    <div >
+                        <div className={"top"}>
+                            <Grid container>
+                                <Grid item xs={4} >
+                                    <Avatar alt="Remy Sharp" className={classNames(classes.avatar, classes.bigAvatar)} src="http://www.imgworlds.com/wp-content/uploads/2015/12/18-CONTACTUS-HEADER.jpg" />
+                                </Grid>
+                                <Grid item xs={8}>
+                                    <Grid container className={classes.likes}>
+                                        <Grid item xs={4}>
+                                            <p className="number">500</p>
+                                            <p className="type">posts</p>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className="number">500</p>
+                                            <p className="type">fellowers</p>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className="number">500</p>
+                                            <p className="type">fellowing</p>
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid className = {"test"}container>
+                                        <Grid item xs={6}>
+                                            <Avatar className={this.state.add ? classes.pinkAvatar : classes.Avatar} >
+                                                <PersonAdd style={{ fontSize: 20 }} onClick={this.personAdd}></PersonAdd>
+                                            </Avatar>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <Avatar className={this.state.like ? classes.pinkAvatar : classes.Avatar}>
+                                                <FavoriteBorder style={{ fontSize: 20 }} onClick={this.personLike}></FavoriteBorder>
+                                            </Avatar>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </div>
-
                     </div>
-
-                    <Grid container className={classNames(classes.pages)}>
-                        <Grid item xs className="choises">
-                            <Maplist style={{ fontSize: 36 }} className={classes.choise} onClick = {this.mapShow}/>
-                        </Grid>
-                        <Grid item xs className="choises">
-                            <Viewlist style={{ fontSize: 36 }} className={classes.choise} onClick = {this.mapClose}/>
-                        </Grid>
-                    </Grid>
                 </div>
 
+                <div className={"mid"}>
+                    <h1 className={"name"}>name</h1>
+                    <p className={"identify"}>some thing about my self</p>
+                </div>
+                <Divider />
+
+                <div className={classes.choises}>
+                    <BottomNavigation value={this.state.viewValue} onChange={this.handleChange}>
+                        <BottomNavigationAction value="gridView" icon={<AppList />} />
+                        <BottomNavigationAction value="listView" icon={<Viewlist />} />
+                        <BottomNavigationAction value="mapView" icon={<Maplist />} />
+                        <BottomNavigationAction value="Favorites" icon={<FavoriteBorder />} />
+                    </BottomNavigation>
+                    {/* <Grid container>
+                        <Grid item xs = {3} style = {{backgroundColor : "red"}}>
+                            <AppList style = {{fontSize :36}}className = "choiseIcon"></AppList>
+                        </Grid>
+                        <Grid item xs = {3}>
+                            <Viewlist style = {{fontSize :36}}className = "choiseIcon"></Viewlist>
+                        </Grid>
+                        <Grid item xs = {3}>
+                            <Maplist style = {{fontSize :36}}className = "choiseIcon"> </Maplist>
+                        </Grid>
+                        <Grid item xs = {3}>
+                            <FavoriteBorder style = {{fontSize :36}}className = "choiseIcon"></FavoriteBorder>
+                        </Grid>
+                    </Grid> */}
+                </div>
+                <Divider></Divider>
                 {show}
+
+
+                {/* <Grid container className={classNames(classes.pages)}>
+                        <Grid item xs className="choises">
+                            <Maplist style={{ fontSize: 36 }} className={classes.choise} onClick={this.mapShow} />
+                        </Grid>
+                        <Grid item xs className="choises">
+                            <Viewlist style={{ fontSize: 36 }} className={classes.choise} onClick={this.mapClose} />
+                        </Grid>
+                    </Grid> */}
+
+                {/* {show} */}
 
 
 

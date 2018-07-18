@@ -25,9 +25,9 @@ const ViewList = (props) => {
     const { classes } = props;
     return (
         <div className={classes.root}>
-            <GridList cellHeight={160} className={classes.gridList} cols={2}>
+            <GridList cellHeight={160} className={classes.gridList} cols={3}>
                 {props.locations.map(tile => (
-                    <GridListTile key={tile.photo_id} cols={parseInt(Math.random(0, 5)) % 2 || 1} className="gridList">
+                    <GridListTile key={tile.photo_id} rows = {1} className="gridList">
                         <Link to= '/post/12341'><img src={tile.photo_file_url} alt={tile.photo_title} /></Link>
                     </GridListTile>
                 ))}

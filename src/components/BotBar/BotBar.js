@@ -8,7 +8,10 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import React from 'react';
 const styles = {
     root: {
-      width: '100%'
+      width: '100%',
+      position : 'fixed',
+      bottom: 0,
+      zIndex : 3
     },
   };
   
@@ -27,7 +30,7 @@ const styles = {
   
       return (
         <BottomNavigation 
-        position="static"
+        position="fixed"
           value={value}
           onChange={this.handleChange}
           showLabels

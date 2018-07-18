@@ -1,3 +1,13 @@
+.number{
+    font-size: 1.2em;
+    font-weight : 600;
+}
+
+.type{
+    font-weight : 200;
+    font-family  :  monospace;
+}
+
 .location{
     font-size: 14px;
     margin-left: 8px
@@ -7,6 +17,45 @@
     border-left:brown 1px solid;
 }
 
-li{
-    margin-left: 0;
+
+.type{
+    margin-top: -8px
+}
+
+
+.top{
+    clear : both;
+    height : 25%;
+    background-color:  #FAFAFA;
+    z-index: 2;
+
+}
+
+.name{
+    margin : 0;
+    margin-top:-10px;
+    margin-left: 7%;
+    position: relative;
+    top: -10px;
+}
+
+.identify{
+    margin : 1%;
+    margin-bottom: 3%;
+    margin-left: 5%;
+    background-color: #FAFAFA;
+    position: relative;
+    top: -10px;
+}
+
+.choiseIcon{
+    margin-left: 27%;
+    margin-top : 11%;
+}
+
+.mid{
+    clear: 'both';
+    height : 9vh;
+    background-color: #FAFAFA;
+    z-index: 0;
 }
