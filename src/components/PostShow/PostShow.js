@@ -84,7 +84,8 @@ const styles = theme => ({
   },
   likedPeople: {
     color: '#41a3f4',
-    width: '5%'
+    width: '3%',
+    height: '2%',
   }
 });
 function HomeIcon(props) {
@@ -94,17 +95,7 @@ function HomeIcon(props) {
     </SvgIcon>
   );
 }
-var allComment = "";
 
-function AddComments(item, index) {
-  //console.log(allComment);
-  var slice = item.user_id + ":  "+ item.user_comment;
-  if (slice.length >= 50) {
-    slice = slice.slice(0,50) + "\n"+slice.slice(50,slice.length);
-  }
-  allComment = allComment + slice + "\n";
-  return allComment;
-}
 
 class PostShow extends Component {
   state ={
@@ -134,8 +125,7 @@ class PostShow extends Component {
                 likes: fakeData.likes,
                 }
             ));
-            console.log(" markers will mount " + this.state.likes);
-             //var title=fakeData.photo_title;
+            //console.log(" markers will mount " + this.state.likes);             
         }
 
         likeClick = () => {
@@ -176,22 +166,22 @@ class PostShow extends Component {
                 {fakeData.owner_name.slice(0,1)}
               </Avatar>
             }
-            action={
-              <IconButton component={Link} to="/">
+            // action={
+            //   <IconButton component={Link} to="/">
               
-                <HomeIcon className={classes.iconHover}style={{ fontSize: 30, paddingTop: 10, paddingRight: 10 }}/> 
-              </IconButton>             
-            }
+            //     <HomeIcon className={classes.iconHover}style={{ fontSize: 30, paddingTop: 10, paddingRight: 10 }}/> 
+            //   </IconButton>             
+            // }
             title={<span style={{lineHeight: 0, fontSize: '0.75rem',color: '#41c4f4'}}>{fakeData.photo_title}</span>}
             subheader={<span style={{lineHeight: 0, fontSize: '0.75rem'}}>{fakeData.upload_date}</span>}
           />
-          <a href= {fakeData.photo_file_url}>
-          <CardMedia
-            className={classes.media}
-            image={fakeData.photo_file_url}
-            src = "picture"
-          />
-          </a>
+          <Link to= '/image'>            
+            <CardMedia
+              className={classes.media}
+              image={fakeData.photo_file_url}
+              src = "picture"
+            />
+          </Link>
           <CardActions className={classes.actions} disableActionSpacing ={true}>
             <IconButton onClick = {this.likeClick}
                         className= {classNames(
@@ -211,13 +201,22 @@ class PostShow extends Component {
               aria-expanded={this.state.expanded}
               aria-label="Show more"
             >
-              <ExpandMoreIcon />
+              <span style = {{fontSize: '0.6rem',color: '#41a3f4'}}><b>View all comment</b></span>
             </IconButton>
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph variant="body2">
-                Method:
+            <CardContent style = {{padding: 0}}>
+              <Typography>
+                <ul id="commentPanel">
+                  {this.state.postReview.map(review => (
+                  <span style = {{fontSize: '0.8rem',color: '#41a3f4'}}> 
+                      {review.user_id}
+                    <span style = {{fontSize: '0.8rem',color: '#bac1bc'}}> 
+                     : {review.user_comment}<br/>  
+                    </span>
+                  </span>          
+                  ))}
+                </ul>
               </Typography>
             </CardContent>
           </Collapse>
@@ -231,11 +230,11 @@ class PostShow extends Component {
           </CardContent>
           <div id = 'likedPeople'>
               <FavoriteIcon className = {classes.likedPeople}/>
-              <span style ={{fontSize: '0.75rem',color: '#41a3f4'}}><b>{this.state.likes} likes</b></span>
+              <span style ={{fontSize: '0.75rem',color: '#41a3f4'}}> <b>{this.state.likes} likes</b></span>
           </div>
           <div className ="comments">
            <ul id="commentPanel">
-            {fakeData.review.map(review => (
+            {this.state.postReview.map(review => (
             <span style = {{fontSize: '0.8rem',color: '#41a3f4'}}> 
                 {review.user_id}
               <span style = {{fontSize: '0.8rem',color: '#bac1bc'}}> 
@@ -256,8 +255,3 @@ PostShow.propTypes = {
 };
 
 export default withStyles(styles)(PostShow);
-
-
-           // <span className = "popuptext" id = "mypopup">
-           //  popup test!
-           // </span>
