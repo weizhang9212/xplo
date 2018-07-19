@@ -1,5 +1,9 @@
+.root{
+    overflow: 'hidden';
+}
+
 .backGound{
-    height: 100vh;
+    height : 150vh;
     width:100%;
     background-position: 60% 50%; 
     background-image: url("http://www.grup-pumsa.cat/uploadwallimgs/b/82/825594_ice-mountain-wallpaper.jpg");
@@ -10,6 +14,40 @@
 }
 
 .rightBar {
-    height : 25%;
+    display: flex;
+    justify-content: center;
     width : 100%;
+}
+
+.nameBar {
+    text-align: center;
+    font-size: 1.7em;
+    font-weight: 900;
+    font-family: fantasy;
+    color :#90CAF9;
+}
+
+.password{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.headIcon{
+    display: flex;
+    justify-content: center;
+}
+
+.redirect{
+    justify-content: center;
+    font-family: system-ui;
+    font-size: 1.0em;
+    font-weight: 100;
+    color :whitesmoke;
+    text-align: center;
+    position: sticky;
+    top:85vh;
+    height : 15vh;
+}
+.signup{
 }

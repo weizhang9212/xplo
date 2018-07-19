@@ -42,15 +42,6 @@ class PageWrapper extends Component {
                     <Route path="/profile/:id" exact component={Profile} />
                     <Route path="/post/:id" exact component={FullPost} />
                     <Route path="/map/:id" exact component={MapContainer} />
-                    <Route path='/'
-                    render={() => (
-                        this.state.logIn ? (
-                            <Redirect to={"/map/"+ this.state.id} />
-                        ) : (
-                                <User logIn = {this.logIn.bind(this)}/>
-                            )
-                    )}
-                />
                 </Switch>
                 <BotBar />
             </div>
