@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import { mailFolderListItems, otherMailFolderListItems } from './TileData';
+import './SideBar.css'
 
 const styles = {
   list: {

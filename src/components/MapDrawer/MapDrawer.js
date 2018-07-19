@@ -110,7 +110,8 @@ export default class MapDrawer extends Component {
           center: {lat: 40.7485722, lng: -74.0068633}, // sets center of google map to NYC.
           zoom: 10, // sets zoom. Lower numbers are zoomed further out.
           mapTypeId: 'roadmap',
-          gestureHandling: 'greedy' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
+          gestureHandling: 'greedy',
+          disableDefaultUI: true // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
         })
         this.map = new maps.Map(node, mapConfig); 
         let bounds = new google.maps.LatLngBounds();
@@ -136,7 +137,7 @@ export default class MapDrawer extends Component {
       }
       if(this.props.person){
         style.width = '100%',
-        style.height = '50vh'
+        style.height = '65vh'
       }
   
       return ( // in our return function you must return a div with ref='map' and style.
