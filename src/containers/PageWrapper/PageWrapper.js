@@ -13,14 +13,24 @@ class PageWrapper extends Component{
         state={
             sideOpen : false
         }
+        newPost=()=>{
+            console.log("new post");
+        }
         render(){
             return(
                 <div>
-                    <TopBar/>
+                    <div id = "center" 
+                    style = {{
+                        position : 'absolute',
+                        left : '25%',
+                        top : '60%',
+                        zIndex : 0
+                    }}></div>
+                    {/* <TopBar/> */}
                     <SideBar 
                     open = {this.state.sideOpen}
                     />
-                    <Switch>
+                    <Switch onClick = {this.newPost}>
                         <Route path = "/" exact component = {MapContainer}/>
                         <Route path = "/profile/:id" component = {Profile}/>
                         <Route path = "/post/:id" component = {FullPost}/>
