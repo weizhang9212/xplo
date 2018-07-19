@@ -31,8 +31,9 @@ const styles = theme => ({
     padding: 0,
     margin: 0,
   },
+
   content: {
-    padding: 0,
+    padding: '5%',
   },
   card: {
     width: '100%', // 90vw basically means take up 90% of the width screen. px also works.
@@ -48,8 +49,8 @@ const styles = theme => ({
   },
   actions: {
     display: 'flex',
-    paddingTop: '4%',
-    paddingBottom: '4%',
+    paddingTop: '7%',
+    paddingBottom: '6%',
     height: 0,
   },
   expand: {
@@ -63,7 +64,8 @@ const styles = theme => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: '#d32600',
+    marginLeft: '40%',
   },
 
   icon: {
@@ -72,20 +74,25 @@ const styles = theme => ({
   iconHover: {
     margin: theme.spacing.unit * 2,
     '&:hover': {
-      color: red[800],
+      color: '#d32600',
     },
   },
   liked: {
     color: red[500],
     width: '10%',
+    paddingLeft: '7%',
+    paddingRight: '6%',
   },
   unliked: {
     width: '10%',
+    paddingLeft: '7%',
+    paddingRight: '6%',
   },
   likedPeople: {
     color: '#41a3f4',
     width: '3%',
-    height: '2%',
+    height: '1%',
+    paddingLeft: '5%',
   }
 });
 function HomeIcon(props) {
@@ -156,26 +163,18 @@ class PostShow extends Component {
     return (
       <div>
         <Card className={classes.card}>
-          <CardHeader className={classes.header}
-            avatar={
+          <div className= "header">            
               <Avatar component={Link} to={"/profile/:id" + fakeData.owner_id} aria-label="avatar" className={classes.avatar} 
-              style ={{ width: '30px',
+              style ={{ display: 'float',
+                        width: '30px',
                         height: '30px',
-                        marginRight: 0,
+                        marginLeft: '3%',
                         textDecoration: 'none'}}>
                 {fakeData.owner_name.slice(0,1)}
-              </Avatar>
-            }
-            // action={
-            //   <IconButton component={Link} to="/">
-              
-            //     <HomeIcon className={classes.iconHover}style={{ fontSize: 30, paddingTop: 10, paddingRight: 10 }}/> 
-            //   </IconButton>             
-            // }
-            title={<span style={{lineHeight: 0, fontSize: '0.75rem',color: '#41c4f4'}}>{fakeData.photo_title}</span>}
-            subheader={<span style={{lineHeight: 0, fontSize: '0.75rem'}}>{fakeData.upload_date}</span>}
-          />
-          <Link to= '/image'>            
+              </Avatar>    
+              <span style={{paddingLeft: '3%', marginTop: '4%', lineHeight: 0, fontSize: '0.75rem',color: 'black'}}>{fakeData.photo_title}</span> 
+          </div> 
+          <Link to= {"/image/:id"}>            
             <CardMedia
               className={classes.media}
               image={fakeData.photo_file_url}
@@ -191,7 +190,9 @@ class PostShow extends Component {
               <FavoriteIcon />
             </IconButton>
             <IconButton aria-label="Share">
-              <ShareIcon />
+              <svg style={{width:'40px', height:'30px', paddingTop: '11%'}}>
+                  <path fill="#000000" d="M21,11L14,4V8C7,9 4,14 3,19C5.5,15.5 9,13.9 14,13.9V18L21,11Z" />
+              </svg>
             </IconButton>
             <IconButton
               className={classnames(classes.expand, {
@@ -201,7 +202,9 @@ class PostShow extends Component {
               aria-expanded={this.state.expanded}
               aria-label="Show more"
             >
-              <span style = {{fontSize: '0.6rem',color: '#41a3f4'}}><b>View all comment</b></span>
+              <svg style={{width:'40px', height:'30px'}}>
+                  <path fill="#000000" d="M12,23A1,1 0 0,1 11,22V19H7A2,2 0 0,1 5,17V7C5,5.89 5.9,5 7,5H21A2,2 0 0,1 23,7V17A2,2 0 0,1 21,19H16.9L13.2,22.71C13,22.9 12.75,23 12.5,23V23H12M13,17V20.08L16.08,17H21V7H7V17H13M3,15H1V3A2,2 0 0,1 3,1H19V3H3V15Z" />
+              </svg>
             </IconButton>
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
@@ -255,3 +258,4 @@ PostShow.propTypes = {
 };
 
 export default withStyles(styles)(PostShow);
+              // <span style = {{fontSize: '0.6rem',color: '#41a3f4'}}><b>View all comment</b></span>
