@@ -14,15 +14,14 @@ import classNames from 'classnames';
 
 const styles = {
   root: {
-    height: '10%',
+    height: '13%',
     width: '100%',
     position: 'fixed',
-    bottom: 0,
+    bottom: 1,
     zIndex: 3
   },
   AddButton :{
     position : 'fixed',
-    bottom : 0,
   }
 };
 
