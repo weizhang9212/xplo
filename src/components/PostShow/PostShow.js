@@ -84,8 +84,8 @@ const styles = theme => ({
   },
   likedPeople: {
     color: '#41a3f4',
-    width: '5%',
-    height: '5%',
+    width: '3%',
+    height: '2%',
   }
 });
 function HomeIcon(props) {
@@ -201,7 +201,7 @@ class PostShow extends Component {
               aria-expanded={this.state.expanded}
               aria-label="Show more"
             >
-              <span style = {{fontSize: '0.6rem',color: '#41a3f4'}}>View all comment</span>
+              <span style = {{fontSize: '0.6rem',color: '#41a3f4'}}><b>View all comment</b></span>
             </IconButton>
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
@@ -230,7 +230,7 @@ class PostShow extends Component {
           </CardContent>
           <div id = 'likedPeople'>
               <FavoriteIcon className = {classes.likedPeople}/>
-              <span style ={{fontSize: '0.75rem',color: '#41a3f4'}}><b>{this.state.likes} likes</b></span>
+              <span style ={{fontSize: '0.75rem',color: '#41a3f4'}}> <b>{this.state.likes} likes</b></span>
           </div>
           <div className ="comments">
            <ul id="commentPanel">
