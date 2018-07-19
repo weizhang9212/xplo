@@ -7,33 +7,23 @@ import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 import Profile from '../Profile/Profile'
 import FullPost from '../FullPost/FullPost'
 import SideBar from '../../components/SideBar/SideBar'
-
+import PostImage from '../../components/PostShow/PostImage.js'
 class PageWrapper extends Component{
 
         state={
             sideOpen : false
         }
-        newPost=()=>{
-            console.log("new post");
-        }
         render(){
             return(
                 <div>
-                    <div id = "center" 
-                    style = {{
-                        position : 'absolute',
-                        left : '25%',
-                        top : '60%',
-                        zIndex : 0
-                    }}></div>
-                    {/* <TopBar/> */}
                     <SideBar 
                     open = {this.state.sideOpen}
                     />
-                    <Switch onClick = {this.newPost}>
+                    <Switch>
                         <Route path = "/" exact component = {MapContainer}/>
                         <Route path = "/profile/:id" component = {Profile}/>
                         <Route path = "/post/:id" component = {FullPost}/>
+                        <Route path = "/image/:id" component = {PostImage}/>
                     </Switch>
                     <BotBar/>
                 </div>

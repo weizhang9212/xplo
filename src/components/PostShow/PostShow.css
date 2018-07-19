@@ -2,7 +2,7 @@
 .comments {
     position: relative;
     max-width: 600px;
-    height: 100px;
+    height: 300px;
     flex-direction: column;
     line-height: 20px;
     background-color: white;
@@ -29,7 +29,9 @@
 #details {
     text-align: left;
 }
-
+#commentPanel {
+    padding-left: 5%;
+}
 #text {
     font-size: 0.75rem;
 }
@@ -38,3 +40,8 @@
     height: 4%;
 }
 
+.header {
+    display: flex;
+    margin-top: 10%;
+    margin-bottom: 2%;
+}
