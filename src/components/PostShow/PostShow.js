@@ -166,22 +166,22 @@ class PostShow extends Component {
                 {fakeData.owner_name.slice(0,1)}
               </Avatar>
             }
-            action={
-              <IconButton component={Link} to="/">
+            // action={
+            //   <IconButton component={Link} to="/">
               
-                <HomeIcon className={classes.iconHover}style={{ fontSize: 30, paddingTop: 10, paddingRight: 10 }}/> 
-              </IconButton>             
-            }
+            //     <HomeIcon className={classes.iconHover}style={{ fontSize: 30, paddingTop: 10, paddingRight: 10 }}/> 
+            //   </IconButton>             
+            // }
             title={<span style={{lineHeight: 0, fontSize: '0.75rem',color: '#41c4f4'}}>{fakeData.photo_title}</span>}
             subheader={<span style={{lineHeight: 0, fontSize: '0.75rem'}}>{fakeData.upload_date}</span>}
           />
-          <a href= {fakeData.photo_file_url}>
-          <CardMedia
-            className={classes.media}
-            image={fakeData.photo_file_url}
-            src = "picture"
-          />
-          </a>
+          <Link to= '/image'>            
+            <CardMedia
+              className={classes.media}
+              image={fakeData.photo_file_url}
+              src = "picture"
+            />
+          </Link>
           <CardActions className={classes.actions} disableActionSpacing ={true}>
             <IconButton onClick = {this.likeClick}
                         className= {classNames(
