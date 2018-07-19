@@ -1,0 +1,15 @@
+.backGound{
+    height: 100vh;
+    width:100%;
+    background-position: 60% 50%; 
+    background-image: url("http://www.grup-pumsa.cat/uploadwallimgs/b/82/825594_ice-mountain-wallpaper.jpg");
+    background-size: cover; 
+    -webkit-background-size: cover; 
+    -moz-background-size: cover; 
+    -o-background-size: cover;
+}
+
+.rightBar {
+    height : 25%;
+    width : 100%;
+}
