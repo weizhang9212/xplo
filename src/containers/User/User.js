@@ -5,24 +5,31 @@ import { Button } from '../../../node_modules/@material-ui/core';
 import LogIn from '../../components/LogIn/Login'
 import SignIn from '../../components/SignIn/SignIn'
 
-class User extends Component{
+class User extends Component {
     state = {
-        hasCount : false
+        hasCount: true
     }
 
-    toLogin=()=>{
-        this.setState({hasCount : true});
+    toLogin = () => {
+        this.setState({ hasCount: true });
     }
 
-    toSignup=()=>{
-        this.setState({hasCount : false})
+    toSignup = () => {
+        this.setState({ hasCount: false })
     }
-    render(){
-        let showPage = <SignIn toLogin = {this.toLogin.bind(this)}/>;
-        if(this.state.hasCount){
-            showPage = <LogIn toSignup = {this.toSignup.bind(this)}/>
+
+    componentDidMount(){
+    }
+    render() {
+        let showPage = <SignIn
+            logIn = {this.props.logIn}
+            toLogin={this.toLogin.bind(this)} />;
+        if (this.state.hasCount) {
+            showPage = <LogIn 
+            logIn = {this.props.logIn}
+            toSignup={this.toSignup.bind(this)} />
         }
-        return(
+        return (
             <div>
                 {showPage}
             </div>

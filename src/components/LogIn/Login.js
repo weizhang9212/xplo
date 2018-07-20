@@ -51,19 +51,39 @@ function HomeIcon(props) {
         </SvgIcon>
     );
 }
-
+let body = null;
+let div = null;
 class Login extends Component {
     state = {
         preUser: null,
         name: "Wei Zhang",
         icon: "sdfasdfasdf",
         username: "",
-        password: ""
+        password: "",
+        fakeName :"admin",
+        fakePass :"admin",
+        height: 0
     }
 
+    typeUserName=(event)=>{
+        this.setState({username : event.target.value});
 
+    }
+
+    typePassWord=(event)=>{
+        
+        this.setState({password : event.target.value});
+    }
+
+    logIn=()=>{
+        if(this.state.username === "admin" && this.state.password === "admin"){
+            this.props.logIn();
+        }
+    }
+
+    componentDidMount(){
+    }
     render() {
-        console.log(this.props);
         const { classes } = this.props;
         let userName = (<div className="password">
         <TextField
@@ -73,6 +93,7 @@ class Login extends Component {
             type="username"
             autoComplete="current-username"
             margin="normal"
+            onChange = {this.typeUserName}
         />
     </div>);
         if(this.state.preUser !== null){
@@ -86,7 +107,7 @@ class Login extends Component {
         }
         return (
             <div className="root_sign">
-                <div className="backGound">
+                <div style = {{height : 812}}className="backGound">
                     <div className="rightBar">
                         <HomeIcon
                             className={classes.icon}
@@ -123,11 +144,12 @@ class Login extends Component {
                             type="password"
                             autoComplete="current-password"
                             margin="normal"
+                            onChange = {this.typePassWord}
                         />
                     </div>
 
                     <div className="redirect">
-                        <p className="signup" onClick = {()=>{console.log("log in")}}> L O G I N</p>
+                        <p className="signup" onClick = {this.logIn}> L O G I N</p>
                         <Divider />
                         <p className="signup" onClick = {this.props.toSignup}> S I G N U P </p>
                         <Divider />

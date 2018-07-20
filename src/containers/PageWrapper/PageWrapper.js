@@ -15,7 +15,7 @@ class PageWrapper extends Component {
 
     state = {
         sideOpen: false,
-        logIn: false,
+        logIn: true,
         id : 132434
     }
     newPost = () => {
@@ -45,6 +45,7 @@ class PageWrapper extends Component {
                     <Route path="/post/:id" exact component={FullPost} />
                     <Route path="/map/:id" exact component={MapContainer} />
                     <Route path = "/image/:id" component = {PostImage}/>
+                    <Route path="/" component={MapContainer} />
                 </Switch>
                 <BotBar />
             </div>

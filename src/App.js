@@ -17,24 +17,10 @@ logIn = () =>{
     return (
       <BrowserRouter>
        <div className="App">
-       <Route path="/user" 
-                    component = {() =>(
-                      this.state.logIn ? (
-                        <Redirect to={"/map/"+ this.state.id} />
-                    ) : (
-                            <User logIn = {this.logIn.bind(this)}/>
-                        )
-                    )} />
-
-       <Route path='/'
-                    component={() => (
-                        this.state.logIn ? (
-                          <PageWrapper logIn = {this.logIn.bind(this)}/>
-                        ) : (
-                          <Redirect to={"/user"} />
-                            )
-                    )}
-                />
+            {this.state.logIn ? 
+            <PageWrapper logIn = {this.logIn.bind(this)}/> :
+            <User logIn = {this.logIn.bind(this)}/>  
+          }
        </div>
       </BrowserRouter>
     );

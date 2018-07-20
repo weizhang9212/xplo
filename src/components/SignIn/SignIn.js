@@ -65,7 +65,7 @@ class SignIn extends Component {
         const { classes } = this.props;
         return (
             <div className="root_sign">
-                <div className="backGound">
+                <div style = {{height : 812}} className="backGound">
                     <div className="rightBar">
                         <HomeIcon
                             className={classes.icon}
