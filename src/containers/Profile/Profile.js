@@ -47,6 +47,7 @@ const styles = {
         height: 80,
     },
     Avatar: {
+        zIndex : 500,
         marginLeft: '35%',
         marginBottom: '10px'
     },
@@ -56,6 +57,7 @@ const styles = {
         textAlign: 'center'
     },
     pinkAvatar: {
+        zIndex : 500,
         marginLeft: '35%',
         marginBottom: '10px',
         color: '#fff',
@@ -211,13 +213,13 @@ class Profile extends Component {
 
                                     <Grid className = {"test"}container>
                                         <Grid item xs={6}>
-                                            <Avatar className={this.state.add ? classes.pinkAvatar : classes.Avatar} >
-                                                <PersonAdd style={{ fontSize: 20 }} onClick={this.personAdd}></PersonAdd>
+                                            <Avatar onClick={this.personAdd} className={this.state.add ? classes.pinkAvatar : classes.Avatar} >
+                                                <PersonAdd style={{ fontSize: 20 }}></PersonAdd>
                                             </Avatar>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Avatar className={this.state.like ? classes.pinkAvatar : classes.Avatar}>
-                                                <FavoriteBorder style={{ fontSize: 20 }} onClick={this.personLike}></FavoriteBorder>
+                                            <Avatar onClick={this.personLike} className={this.state.like ? classes.pinkAvatar : classes.Avatar}>
+                                                <FavoriteBorder style={{ fontSize: 20 }} ></FavoriteBorder>
                                             </Avatar>
                                         </Grid>
                                     </Grid>
