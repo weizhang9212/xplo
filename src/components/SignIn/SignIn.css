@@ -1,9 +1,9 @@
 .root{
-    overflow: auto;
+    overflow: hide;
 }
 
 .backGound{
-    height : 130vh;
+    height : 150vh;
     width:100%;
     background-position: 60% 50%; 
     background-image: url("http://www.grup-pumsa.cat/uploadwallimgs/b/82/825594_ice-mountain-wallpaper.jpg");
@@ -28,10 +28,12 @@
     font-family: fantasy;
     color :#90CAF9;
 }
-
-.password{
+.row{
     display: flex;
     justify-content: center;
+}
+.password{
+
     margin-bottom: 10px;
 }
 
@@ -53,3 +55,4 @@
 }
 .signup{
 }
+

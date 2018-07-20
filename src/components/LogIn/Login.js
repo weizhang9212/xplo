@@ -35,7 +35,7 @@ const styles = ({
         width: 100,
         height: 100,
         border: '10px solid rgba(255, 255, 255, .5)',
-        borderTop :'-10px',
+        borderTop: '-10px',
         background: 'white',
         backgroundClip: 'padding-box'
     },
@@ -54,14 +54,38 @@ function HomeIcon(props) {
 
 class Login extends Component {
     state = {
-        preUser : null,
+        preUser: null,
         name: "Wei Zhang",
-        icon: "sdfasdfasdf"
+        icon: "sdfasdfasdf",
+        username: "",
+        password: ""
     }
+
+
     render() {
+        console.log(this.props);
         const { classes } = this.props;
+        let userName = (<div className="password">
+        <TextField
+            id="username-input"
+            label="username"
+            className={classes.textField}
+            type="username"
+            autoComplete="current-username"
+            margin="normal"
+        />
+    </div>);
+        if(this.state.preUser !== null){
+            userName = (<div className="headIcon">
+            <Avatar
+                alt="Adelle Charles"
+                src="http://www.imgworlds.com/wp-content/uploads/2015/12/18-CONTACTUS-HEADER.jpg"
+                className={classNames(classes.avatar, classes.bigAvatar)}
+            />
+        </div>);
+        }
         return (
-            <div className = "root">
+            <div className="root_sign">
                 <div className="backGound">
                     <div className="rightBar">
                         <HomeIcon
@@ -70,7 +94,7 @@ class Login extends Component {
                             style={{
                                 fontSize: 200,
                                 position: "relative",
-                                top:-10
+                                top: -10
                             }}
                             component={svgProps => (
                                 <svg {...svgProps}>
@@ -87,14 +111,8 @@ class Login extends Component {
                     </div>
 
                     <div className="nameBar">
-                        <p>Welcome  {this.state.name}</p>
-                        <div className="headIcon">
-                            <Avatar
-                                alt="Adelle Charles"
-                                src="http://www.imgworlds.com/wp-content/uploads/2015/12/18-CONTACTUS-HEADER.jpg"
-                                className={classNames(classes.avatar, classes.bigAvatar)}
-                            />
-                        </div>
+                        {/* <p>Welcome  {this.state.name}</p> */}
+                       {userName}
                     </div>
 
                     <div className="password">
@@ -108,10 +126,11 @@ class Login extends Component {
                         />
                     </div>
 
-                    <div className = "redirect">
-                    <Divider/>
-                        <p className = "signup"> S I G N U P </p>
-                    <Divider/>
+                    <div className="redirect">
+                        <p className="signup" onClick = {()=>{console.log("log in")}}> L O G I N</p>
+                        <Divider />
+                        <p className="signup" onClick = {this.props.toSignup}> S I G N U P </p>
+                        <Divider />
                     </div>
 
                 </div>

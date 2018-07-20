@@ -17,9 +17,8 @@ logIn = () =>{
     return (
       <BrowserRouter>
        <div className="App">
-
        <Route path="/user" 
-                    render = {() =>(
+                    component = {() =>(
                       this.state.logIn ? (
                         <Redirect to={"/map/"+ this.state.id} />
                     ) : (
@@ -28,7 +27,7 @@ logIn = () =>{
                     )} />
 
        <Route path='/'
-                    render={() => (
+                    component={() => (
                         this.state.logIn ? (
                           <PageWrapper logIn = {this.logIn.bind(this)}/>
                         ) : (
@@ -36,8 +35,6 @@ logIn = () =>{
                             )
                     )}
                 />
-        
-        {/* <PageWrapper></PageWrapper> */}
        </div>
       </BrowserRouter>
     );

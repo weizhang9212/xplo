@@ -7,14 +7,21 @@ import SignIn from '../../components/SignIn/SignIn'
 
 class User extends Component{
     state = {
-        hasCount : true
+        hasCount : false
+    }
+
+    toLogin=()=>{
+        this.setState({hasCount : true});
+    }
+
+    toSignup=()=>{
+        this.setState({hasCount : false})
     }
     render(){
-        let showPage = <SignIn/>;
+        let showPage = <SignIn toLogin = {this.toLogin.bind(this)}/>;
         if(this.state.hasCount){
-            showPage = <LogIn/>
+            showPage = <LogIn toSignup = {this.toSignup.bind(this)}/>
         }
-        console.log(this.props)
         return(
             <div>
                 {showPage}
