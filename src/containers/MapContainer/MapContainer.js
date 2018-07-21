@@ -3,6 +3,7 @@ import { GoogleApiWrapper, Map , Marker} from 'google-maps-react'
 import { Divider } from '@material-ui/core';
 import MapDrawer from '../../components/MapDrawer/MapDrawer'
 import data from '../../data'
+import { connect } from 'react-redux'
 
 export class MapContainer extends Component {
 
@@ -29,7 +30,7 @@ export class MapContainer extends Component {
       this.props.history.push('/post/' + id);
     }
   render() {
-    console.log(this.props);
+    this.props.switch(0);
     const style = {
       width: '100%',
       height: '80vh'
@@ -49,7 +50,23 @@ export class MapContainer extends Component {
   }
 }
 // OTHER MOST IMPORTANT: Here we are exporting the App component WITH the GoogleApiWrapper. You pass it down with an object containing your API key
-export default GoogleApiWrapper({
-    apiKey: 'AIzaSyChZPizXo_3sk70Cm4yveOd0YfQtuxc7As',
-    libraries: ['visualization']
-})(MapContainer)
+const mapStateToProps = (state) => {
+  return {
+    page: state.currentPage
+  };
+}
+
+const mapDispatchToProps = dispatch =>{
+    return {
+      switch: (val)=>{dispatch({ type : 'BOTBAR', choice : val});}
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleApiWrapper({
+  apiKey: 'AIzaSyChZPizXo_3sk70Cm4yveOd0YfQtuxc7As',
+  libraries: ['visualization']
+})(MapContainer));
+
+// export default GoogleApiWrapper({
+//     apiKey: 'AIzaSyChZPizXo_3sk70Cm4yveOd0YfQtuxc7As',
+//     libraries: ['visualization']
+// })(MapContainer)

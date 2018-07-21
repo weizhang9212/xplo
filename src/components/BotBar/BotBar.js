@@ -11,6 +11,7 @@ import { Route, Link } from 'react-router-dom';
 import AddButton from '../AddList/AddList'
 import { Divider } from 'material-ui';
 import classNames from 'classnames';
+import { connect } from 'react-redux'
 
 const styles = {
   root: {
@@ -31,25 +32,20 @@ class SimpleBottomNavigation extends React.Component {
   };
 
   componentWillMount() {
-    console.log(this.props);
   }
   handleChange = (event, value) => {
-    if(value === 1){
-      return;
-    }
-    this.setState({ value });
+    this.props.switch(value);
   };
 
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
 
     return (
       <div>
 
         <BottomNavigation
           position="fixed"
-          value={value}
+          value={this.props.page}
           onChange={this.handleChange}
           showLabels
           className={classes.root}
@@ -64,5 +60,15 @@ class SimpleBottomNavigation extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    page: state.currentPage
+  };
+}
 
-export default withStyles(styles)(SimpleBottomNavigation);
+const mapDispatchToProps = dispatch =>{
+    return {
+      switch: (val)=>{dispatch({ type : 'BOTBAR', choice : val});}
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SimpleBottomNavigation));
