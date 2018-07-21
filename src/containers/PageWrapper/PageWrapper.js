@@ -9,7 +9,8 @@ import FullPost from '../FullPost/FullPost'
 import SideBar from '../../components/SideBar/SideBar'
 import User from '../User/User'
 import PostImage from '../../components/PostShow/PostImage.js'
-
+import WritePost from '../../components/WritePost/WriteIndex.js'
+import Privacy from '../../components/WritePost/Privacy.js'
 
 class PageWrapper extends Component {
 
@@ -44,7 +45,8 @@ class PageWrapper extends Component {
                     <Route path="/profile/:id" exact component={Profile} />
                     <Route path="/post/:id" exact component={FullPost} />
                     <Route path="/map/:id" exact component={MapContainer} />
-                    <Route path = "/image/:id" component = {PostImage}/>
+                    <Route path="/post/:id/image" component = {PostImage}/>
+                    <Route path="/writePost/:id" component = {WritePost}/>
                     <Route path='/'
                     render={() => (
                         this.state.logIn ? (

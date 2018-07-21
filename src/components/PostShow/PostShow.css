@@ -42,6 +42,27 @@
 
 .header {
     display: flex;
-    margin-top: 10%;
+    margin-top: 3%;
     margin-bottom: 2%;
+}
+.Header {
+    display: flex;
+    width: 100%;
+    height: 10vh;
+/*  border: 1px solid red;*/
+    padding: 0;
+}
+
+#Title {
+    padding-left: 31%;
+    margin-top: 15px;
+    font-size: 19px;
+    font-family: Circular Std Bold;
+}
+
+@font-face {
+font-family: 'Circular Std Bold';
+font-style: normal;
+font-weight: normal;
+src: local('Circular Std Bold'), url('CircularStd-Bold.woff') format('woff');
 }

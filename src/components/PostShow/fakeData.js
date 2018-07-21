@@ -23,6 +23,7 @@ var fakeData = {
  "photo_file_url":"http://mw2.google.com/mw-panoramio/photos/medium/532693.jpg",
  "upload_date": "12 March 2007", 
  "owner_id": 49870, 
- "owner_name": "Jean-Michel Raggioli"}
-
+ "owner_name": "Jean-Michel Raggioli",
+ "chosen_photo_url": "https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg",
+ }
 export default fakeData;
