@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
 import PageWrapper from './containers/PageWrapper/PageWrapper'
 import { BrowserRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import User from './containers/User/User'
 class App extends Component {
+  state = {
+    id: 132434
+  }
+
+  logIn = () => {
+    this.setState({ logIn: true });
+  }
   render() {
+    console.log(this.props);
     return (
       <BrowserRouter>
-       <div className="App">
-        <PageWrapper></PageWrapper>
-       </div>
+        <div className="App">
+          {this.props.logIn ?
+            <PageWrapper logIn={this.logIn.bind(this)} /> :
+            <User logIn={this.logIn.bind(this)} />
+          }
+        </div>
       </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    logIn: state.logIn
+  };
+}
+export default connect(mapStateToProps)(App);

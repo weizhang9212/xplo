@@ -2,11 +2,12 @@ import React , {Component} from 'react';
 import { Divider } from '@material-ui/core';
 import { Route, Switch, Link } from 'react-router-dom';
 import PostShow from '../../components/PostShow/PostShow'
+import { connect } from 'react-redux'
 
-export default class FullPost extends Component{
+
+class FullPost extends Component{
     render(){
-        console.log(this.props);
-
+        this.props.switch(10);
         return (
             <div>
             	<PostShow>
@@ -15,3 +16,16 @@ export default class FullPost extends Component{
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+      page: state.currentPage
+    };
+  }
+  
+  const mapDispatchToProps = dispatch =>{
+      return {
+        switch: (val)=>{dispatch({ type : 'BOTBAR', choice : val});}
+      }
+  }
+  export default connect(mapStateToProps, mapDispatchToProps)(FullPost);

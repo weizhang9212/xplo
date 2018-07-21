@@ -28,6 +28,8 @@ import GridList from './GridList/GridList';
 import MapList from './MapList/MapList';
 import SingleList from './SingleList/SingleList'
 
+import { connect } from 'react-redux'
+
 import './Profile.css'
 
 
@@ -47,6 +49,7 @@ const styles = {
         height: 80,
     },
     Avatar: {
+        zIndex : 500,
         marginLeft: '35%',
         marginBottom: '10px'
     },
@@ -56,6 +59,7 @@ const styles = {
         textAlign: 'center'
     },
     pinkAvatar: {
+        zIndex : 500,
         marginLeft: '35%',
         marginBottom: '10px',
         color: '#fff',
@@ -149,7 +153,7 @@ class Profile extends Component {
 
 
     render() {
-        console.log("render");
+        this.props.switch(2);
         const { classes } = this.props;
         let show = <GridList locations={this.state.locations}
             toProfile={this.routeToProfile.bind(this)}
@@ -170,19 +174,6 @@ class Profile extends Component {
                 toPost={this.routeToPost.bind(this)}
             />
         }
-
-        // let show = <MapList
-        //     locations={this.state.locations}
-        //     toProfile={this.routeToProfile.bind(this)}
-        //     toPost={this.routeToPost.bind(this)}
-        // />;
-        // if (this.state.showMap === false) {
-        //     console.log(false);
-        //     show = <ViewList locations={this.state.locations}
-        //         toProfile={this.routeToProfile.bind(this)}
-        //         toPost={this.routeToPost.bind(this)}
-        //     />
-        // }
         return (
 
             <div>
@@ -211,13 +202,13 @@ class Profile extends Component {
 
                                     <Grid className = {"test"}container>
                                         <Grid item xs={6}>
-                                            <Avatar className={this.state.add ? classes.pinkAvatar : classes.Avatar} >
-                                                <PersonAdd style={{ fontSize: 20 }} onClick={this.personAdd}></PersonAdd>
+                                            <Avatar onClick={this.personAdd} className={this.state.add ? classes.pinkAvatar : classes.Avatar} >
+                                                <PersonAdd style={{ fontSize: 20 }}></PersonAdd>
                                             </Avatar>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Avatar className={this.state.like ? classes.pinkAvatar : classes.Avatar}>
-                                                <FavoriteBorder style={{ fontSize: 20 }} onClick={this.personLike}></FavoriteBorder>
+                                            <Avatar onClick={this.personLike} className={this.state.like ? classes.pinkAvatar : classes.Avatar}>
+                                                <FavoriteBorder style={{ fontSize: 20 }} ></FavoriteBorder>
                                             </Avatar>
                                         </Grid>
                                     </Grid>
@@ -240,41 +231,23 @@ class Profile extends Component {
                         <BottomNavigationAction value="mapView" icon={<Maplist />} />
                         <BottomNavigationAction value="Favorites" icon={<FavoriteBorder />} />
                     </BottomNavigation>
-                    {/* <Grid container>
-                        <Grid item xs = {3} style = {{backgroundColor : "red"}}>
-                            <AppList style = {{fontSize :36}}className = "choiseIcon"></AppList>
-                        </Grid>
-                        <Grid item xs = {3}>
-                            <Viewlist style = {{fontSize :36}}className = "choiseIcon"></Viewlist>
-                        </Grid>
-                        <Grid item xs = {3}>
-                            <Maplist style = {{fontSize :36}}className = "choiseIcon"> </Maplist>
-                        </Grid>
-                        <Grid item xs = {3}>
-                            <FavoriteBorder style = {{fontSize :36}}className = "choiseIcon"></FavoriteBorder>
-                        </Grid>
-                    </Grid> */}
                 </div>
                 <Divider></Divider>
                 {show}
-
-
-                {/* <Grid container className={classNames(classes.pages)}>
-                        <Grid item xs className="choises">
-                            <Maplist style={{ fontSize: 36 }} className={classes.choise} onClick={this.mapShow} />
-                        </Grid>
-                        <Grid item xs className="choises">
-                            <Viewlist style={{ fontSize: 36 }} className={classes.choise} onClick={this.mapClose} />
-                        </Grid>
-                    </Grid> */}
-
-                {/* {show} */}
-
-
-
             </div>
         );
     }
 }
 
-export default withStyles(styles)(Profile);
+const mapStateToProps = (state) => {
+    return {
+      page: state.currentPage
+    };
+  }
+  
+  const mapDispatchToProps = dispatch =>{
+      return {
+        switch: (val)=>{dispatch({ type : 'BOTBAR', choice : val});}
+      }
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Profile));
