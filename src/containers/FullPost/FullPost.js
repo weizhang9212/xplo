@@ -6,8 +6,10 @@ import { connect } from 'react-redux'
 
 
 class FullPost extends Component{
+    componentWillMount(){
+       this.props.switch(10);
+    }
     render(){
-        this.props.switch(10);
         return (
             <div>
             	<PostShow>

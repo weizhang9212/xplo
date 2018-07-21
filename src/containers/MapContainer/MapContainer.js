@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 export class MapContainer extends Component {
 
     componentWillMount(){
-      console.log(data);
+      this.props.switch(0);
       this.setState({locations : data.photos.slice(0,100)})
       this.setState({dreamLocations : data.photos.slice(200,220)});
     }
@@ -30,7 +30,6 @@ export class MapContainer extends Component {
       this.props.history.push('/post/' + id);
     }
   render() {
-    this.props.switch(0);
     const style = {
       width: '100%',
       height: '80vh'

@@ -151,9 +151,12 @@ class Profile extends Component {
         this.setState({ viewValue: value });
     };
 
+    componentWillMount(){
+        this.props.switch(2);
+    }
+
 
     render() {
-        this.props.switch(2);
         const { classes } = this.props;
         let show = <GridList locations={this.state.locations}
             toProfile={this.routeToProfile.bind(this)}
