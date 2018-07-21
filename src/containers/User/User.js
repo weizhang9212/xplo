@@ -21,6 +21,8 @@ class User extends Component {
 
     componentDidMount(){
     }
+
+    
     render() {
         let showPage = <SignIn
             logIn = {this.props.login}

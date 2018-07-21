@@ -8,17 +8,14 @@ class App extends Component {
     id: 132434
   }
 
-  logIn = () => {
-    this.setState({ logIn: true });
-  }
   render() {
-    console.log(this.props);
+    console.log("rerender" + ":" + this.props.login);
     return (
       <BrowserRouter>
         <div className="App">
-          {this.props.logIn ?
-            <PageWrapper logIn={this.logIn.bind(this)} /> :
-            <User logIn={this.logIn.bind(this)} />
+          {this.props.login ?
+            <PageWrapper /> :
+            <User />
           }
         </div>
       </BrowserRouter>
@@ -28,7 +25,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    logIn: state.logIn
+    login: state.logIn
   };
 }
+
 export default connect(mapStateToProps)(App);

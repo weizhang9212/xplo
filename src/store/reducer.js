@@ -6,6 +6,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) =>{
     if(action.type === 'LOGIN'){
+        console.log(111);
         return {
             ...initialState,
             logIn : true
@@ -15,6 +16,7 @@ const reducer = (state = initialState, action) =>{
     if(action.type === 'BOTBAR'){
         return {
             ...initialState,
+            logIn:true,
             currentPage: action.choice
         }
     }

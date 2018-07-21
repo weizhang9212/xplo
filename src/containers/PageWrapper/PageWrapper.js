@@ -23,9 +23,6 @@ class PageWrapper extends Component {
         console.log("new post");
     }
 
-    logIn = () =>{
-        this.setState({logIn : true});
-    }
     render() {
         return (
             <div>
