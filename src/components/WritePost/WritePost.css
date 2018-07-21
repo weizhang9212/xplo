@@ -1,0 +1,102 @@
+.Header {
+	display: flex;
+	width: 100%;
+	height: 10vh;
+/*	border: 1px solid red;*/
+	padding: 0;
+}
+
+#Title {
+	padding-left: 90px;
+	padding-right: 80px;
+	margin-top: 15px;
+	text-align: center;
+	font-size: 19px;
+	font-family: Circular Std Bold;
+}
+
+#Next {
+	margin-right: 10px;
+	margin-top: 15px;
+	text-align: center;
+	font-size: 19px;
+	font-family: Circular Std Bold;
+}
+
+.Content {
+	width: 100%;
+	height: 80vh;
+	padding: 0;
+	background-color:#f7f7f7;
+}
+
+#myTextArea {
+	padding: 2%;
+	padding-right: 0%;
+	height: 30%;
+	width: 98%;
+}
+
+.SubContent{
+	width: 100%;
+	height: 40vh;
+
+	padding: 0;
+}
+
+.Privacy{
+	display: flex;
+	height:16%;
+	width: 100%;
+
+}
+
+.Photo {
+ 	height:50%;
+	width: 100%;
+	margin-top: 3%; 
+}
+
+#ChosenImg {
+	float: bottom;
+	-ms-interpolation-mode: bicubic;
+	width: 25%;
+	height: 50%;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	padding-right: 6%;
+	padding-left: 6%;
+	border-radius: 35px;
+}
+
+.Emoji {
+	display: flex;
+ 	height:16%;
+	width: 100%;
+	margin-top: 1%; 
+}
+
+.Address {
+	display: flex;
+ 	height:16%;
+	width: 100%;
+	margin-top: 1%; 
+}
+@font-face {
+font-family: 'Circular Std Bold';
+font-style: normal;
+font-weight: normal;
+src: local('Circular Std Bold'), url('CircularStd-Bold.woff') format('woff');
+}
+@font-face {
+font-family: 'Circular Std Black';
+font-style: normal;
+font-weight: normal;
+src: local('Circular Std Black'), url('CircularStd-Black.woff') format('woff');
+}
+@font-face {
+font-family: 'Proxima Nova Alt Light';
+font-style: normal;
+font-weight: normal;
+src: local('Proxima Nova Alt Light'), url('Mark Simonson - Proxima Nova Alt Light.woff') format('woff');
+}

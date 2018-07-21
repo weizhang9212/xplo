@@ -1,0 +1,56 @@
+.Header {
+	display: flex;
+	width: 100%;
+	height: 10vh;
+/*	border: 1px solid red;*/
+	padding: 0;
+}
+
+#Title {
+	padding-left: 90px;
+	padding-right: 80px;
+	margin-top: 15px;
+	text-align: center;
+	font-size: 4;
+	font-family: Circular Std Bold;
+}
+
+
+.SubContent{
+	width: 100%;
+	height: 40vh;
+
+	padding: 0;
+}
+
+.Privacy{
+	display: flex;
+	height:16%;
+	width: 100%;
+
+}
+
+.Emoji {
+	display: flex;
+ 	height:16%;
+	width: 100%;
+	margin-top: 1%; 
+}
+@font-face {
+font-family: 'Circular Std Bold';
+font-style: normal;
+font-weight: normal;
+src: local('Circular Std Bold'), url('CircularStd-Bold.woff') format('woff');
+}
+@font-face {
+font-family: 'Circular Std Black';
+font-style: normal;
+font-weight: normal;
+src: local('Circular Std Black'), url('CircularStd-Black.woff') format('woff');
+}
+@font-face {
+font-family: 'Proxima Nova Alt Light';
+font-style: normal;
+font-weight: normal;
+src: local('Proxima Nova Alt Light'), url('Mark Simonson - Proxima Nova Alt Light.woff') format('woff');
+}

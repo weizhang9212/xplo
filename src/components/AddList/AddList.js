@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import { Route, Switch, Link } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AddIcon from '@material-ui/icons/AddCircleOutline'
@@ -57,18 +58,20 @@ class SimpleMenu extends React.Component {
                         onClose={this.handleClose}
                         anchorEl={center}
                     >
-                        <MenuItem  className={classes.list} onClick={this.handleClose }>
-                            <p style ={{
-                                 height : 30,
-                                 width : '40%'
-                                 }}>Take a pic</p>
-                        </MenuItem>
-                        <MenuItem  className={classes.list} onClick={this.handleClose}>
-                            <p style ={{ 
-                                height : 30,
-                                width : '40%'
-                                }}>Select from Phone</p>
-                        </MenuItem>
+                        <Link to= {"/writePost/:id"} style = {{textDecoration: 'none'}}>  
+                            <MenuItem  className={classes.list} onClick={this.handleClose }>
+                                <p style ={{
+                                     height : 30,
+                                     width : '40%'
+                                     }}>Take a pic</p>
+                            </MenuItem>
+                            <MenuItem  className={classes.list} onClick={this.handleClose}>
+                                <p style ={{ 
+                                    height : 30,
+                                    width : '40%'
+                                    }}>Select from Phone</p>
+                            </MenuItem>
+                        </Link>
                     </Menu>
                 </div>
             </div>

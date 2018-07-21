@@ -28,6 +28,7 @@ import classNames from 'classnames';
 import { Divider } from '@material-ui/core';
 const styles = theme => ({
   header: {
+    display: 'flex',
     padding: 0,
     margin: 0,
   },
@@ -37,6 +38,7 @@ const styles = theme => ({
   },
   card: {
     width: '100%', // 90vw basically means take up 90% of the width screen. px also works.
+    backgroundColor:'#f9f9f9',
     //height: '90vh'
   },
   media: {
@@ -46,6 +48,7 @@ const styles = theme => ({
     borderRadius: 10,
     border: 0,
     boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
+    msInterpolationMode: 'bicubic',
   },
   actions: {
     display: 'flex',
@@ -162,10 +165,16 @@ class PostShow extends Component {
     //const {owner_name} = this.state.owner_name;
     return (
       <div>
+        <div className = "Header">
+          <Link to= {"/"}> 
+            <i style={{fontSize: '50px', color: 'black'}} className="material-icons ">keyboard_arrow_left</i>                  
+          </Link>
+          <span id= "Title" style={{paddingLeft: '31%'}}><b>Post</b></span>
+        </div>
         <Card className={classes.card}>
           <div className= "header">            
               <Avatar component={Link} to={"/profile/:id" + fakeData.owner_id} aria-label="avatar" className={classes.avatar} 
-              style ={{ display: 'float',
+              style ={{ 
                         width: '30px',
                         height: '30px',
                         marginLeft: '3%',
@@ -174,7 +183,7 @@ class PostShow extends Component {
               </Avatar>    
               <span style={{paddingLeft: '3%', marginTop: '4%', lineHeight: 0, fontSize: '0.75rem',color: 'black'}}>{fakeData.photo_title}</span> 
           </div> 
-          <Link to= {"/image/:id"}>            
+          <Link to= {"/post/:id/image"}>            
             <CardMedia
               className={classes.media}
               image={fakeData.photo_file_url}
