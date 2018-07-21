@@ -122,6 +122,8 @@ class WriteIndex extends Component {
             showPage = <Emoji
             choseEmoji={this.choseEmoji.bind(this)}
             toWrite={this.toWrite.bind(this)}/>
+        }else if (this.state.setAddress){
+
         }
         return (
             <div>

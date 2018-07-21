@@ -44,7 +44,7 @@ class PageWrapper extends Component {
                 <Switch onClick={this.newPost}>
                     <Route path="/profile/:id" exact component={Profile} />
                     <Route path="/post/:id" exact component={FullPost} />
-                    <Route path="/" component={MapContainer} />
+                    <Route path="/map/:id" exact component={MapContainer} />
                     <Route path="/post/:id/image" component = {PostImage}/>
                     <Route path="/writePost/:id" component = {WritePost}/>
                     <Route path='/'
