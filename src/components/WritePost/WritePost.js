@@ -61,7 +61,7 @@ export default class WritePost extends Component{
 	               			<i style={{paddingTop: '2.5%'}} className="material-icons">keyboard_arrow_right</i>
 	               		</div>
 	               		<Divider/>
-	               		<div className = "Address">
+	               		<div className = "Address" onClick = {this.props.toAddress}>
 	               			<span style={{fontFamily: 'Proxima Nova Alt Light', fontSize: 16, marginLeft: '6%', marginTop: '3%'}} > Address <br/></span> 
 	               			<i style={{paddingTop: '2.5%', marginLeft: '70%'}} className="material-icons">keyboard_arrow_right</i>
 	               		</div>

@@ -5,6 +5,7 @@ import WritePost from './WritePost'
 import Privacy from './Privacy'
 import Photo from './Photo'
 import Emoji from './Emoji'
+import GeolocationExample from './GeolocationExample'
 
 class WriteIndex extends Component {
     state = {
@@ -108,6 +109,7 @@ class WriteIndex extends Component {
             emoji = {this.state.emoji}
             toPrivacy={this.toPrivacy.bind(this)}
             toPhoto={this.toPhoto.bind(this)}
+            toAddress={this.toAddress.bind(this)}
             toEmoji={this.toEmoji.bind(this)}/>;
         if (this.state.setPrivacy) {
             showPage = <Privacy
@@ -123,7 +125,9 @@ class WriteIndex extends Component {
             choseEmoji={this.choseEmoji.bind(this)}
             toWrite={this.toWrite.bind(this)}/>
         }else if (this.state.setAddress){
+            showPage = <GeolocationExample
 
+            toWrite={this.toWrite.bind(this)}/>
         }
         return (
             <div>
