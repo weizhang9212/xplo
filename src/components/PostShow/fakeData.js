@@ -20,7 +20,7 @@ var fakeData = {
  {"user_id": "Marios M.", "user_comment": "where is Greece ?﻿"},
  {"user_id": "Grc.", "user_comment": "Most beautiful place in the world : my bed﻿"},
  {"user_id": "Eliban Valera", "user_comment": "Look into the Caribbean"}],
- "photo_file_url":"http://mw2.google.com/mw-panoramio/photos/medium/532693.jpg",
+ "photo_file_url":"https://forums.imore.com/attachments/wallpapers-ringtones/57829d1401838940t-ios-8-wallpaper-imageuploadedbytapatalk1401838939.523662.jpg",
  "upload_date": "12 March 2007", 
  "owner_id": 49870, 
  "owner_name": "Jean-Michel Raggioli",

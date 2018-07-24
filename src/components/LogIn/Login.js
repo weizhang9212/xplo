@@ -100,7 +100,7 @@ class Login extends Component {
             userName = (<div className="headIcon">
             <Avatar
                 alt="Adelle Charles"
-                src="http://www.imgworlds.com/wp-content/uploads/2015/12/18-CONTACTUS-HEADER.jpg"
+                src="https://www.imgworlds.com/wp-content/uploads/2015/12/18-CONTACTUS-HEADER.jpg"
                 className={classNames(classes.avatar, classes.bigAvatar)}
             />
         </div>);
