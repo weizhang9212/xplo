@@ -34,7 +34,7 @@ class SimpleBottomNavigation extends React.Component {
   componentWillMount() {
   }
   handleChange = (event, value) => {
-    this.props.switch(value);
+    // this.props.switch(value);
   };
 
   render() {

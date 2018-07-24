@@ -58,13 +58,15 @@ class SimpleMenu extends React.Component {
                         onClose={this.handleClose}
                         anchorEl={center}
                     >
-                        <Link to= {"/writePost/:id"} style = {{textDecoration: 'none'}}>  
+                        <Link to= {"/writePostPic/sadfasdf"} style = {{textDecoration: 'none'}}>  
                             <MenuItem  className={classes.list} onClick={this.handleClose }>
                                 <p style ={{
                                      height : 30,
                                      width : '40%'
                                      }}>Take a pic</p>
                             </MenuItem>
+                        </Link>
+                        <Link to= {"/writePost/:id"} style = {{textDecoration: 'none'}}>
                             <MenuItem  className={classes.list} onClick={this.handleClose}>
                                 <p style ={{ 
                                     height : 30,

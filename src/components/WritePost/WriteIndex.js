@@ -5,9 +5,12 @@ import WritePost from './WritePost'
 import Privacy from './Privacy'
 import Photo from './Photo'
 import Emoji from './Emoji'
+import Img from './FullImage'
+
 
 class WriteIndex extends Component {
     state = {
+        checkImg: false,
         backHome: false,
         writePost: true,
         setPrivacy: false,
@@ -15,115 +18,164 @@ class WriteIndex extends Component {
         setEmoji: false,
         setAddress: false,
         privacy: 'Public',
-        photo_url: "https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg",
+        photo_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3DyJgSZ9l-M88a6vhh-ZzXWPGcsqTYpuWelSWOvWi-nm98Jpn",
         emoji: 0x1F600,
     }
 
+    setImg = (url) =>{
+        this.setState({
+            photo_url : url 
+        })
+    }
+
+    toImage = () => {
+        this.setState({
+            checkImg: true,
+            backHome: false,
+            setPhoto: false,
+            writePost: false,
+            setPrivacy: false,
+            setEmoji: false,
+            setAddress: false,
+        });
+    }
+
     toHome = () => {
-        this.setState({ backHome: true,
-        setPhoto: false,
-        writePost: false,
-        setPrivacy: false,
-        setEmoji: false,
-        setAddress: false, });
+        this.setState({
+            checkImg: false,
+            backHome: true,
+            setPhoto: false,
+            writePost: false,
+            setPrivacy: false,
+            setEmoji: false,
+            setAddress: false,
+        });
     }
 
     toPrivacy = () => {
-        this.setState({ backHome: false,
-        writePost: false,
-        setPrivacy: true,
-        setPhoto: false,
-        setEmoji: false,
-        setAddress: false, });
+        this.setState({
+            checkImg: false,
+            backHome: false,
+            writePost: false,
+            setPrivacy: true,
+            setPhoto: false,
+            setEmoji: false,
+            setAddress: false,
+        });
     }
 
     toWrite = () => {
-        this.setState({ backHome: false,
-        writePost: true,
-        setPrivacy: false,
-        setPhoto: false,
-        setEmoji: false,
-        setAddress: false, });
+        this.setState({
+            checkImg: false,
+            backHome: false,
+            writePost: true,
+            setPrivacy: false,
+            setPhoto: false,
+            setEmoji: false,
+            setAddress: false,
+        });
     }
 
     toPhoto = () => {
-        this.setState({ backHome: false,
-        writePost: false,
-        setPrivacy: false,
-        setPhoto: true,
-        setEmoji: false,
-        setAddress: false, });
+        this.setState({
+            checkImg: false,
+            backHome: false,
+            writePost: false,
+            setPrivacy: false,
+            setPhoto: true,
+            setEmoji: false,
+            setAddress: false,
+        });
     }
 
     toEmoji = () => {
-        this.setState({ backHome: false,
-        writePost: false,
-        setPrivacy: false,
-        setPhoto: false,
-        setEmoji: true,
-        setAddress: false, });
+        this.setState({
+            checkImg: false,
+            backHome: false,
+            writePost: false,
+            setPrivacy: false,
+            setPhoto: false,
+            setEmoji: true,
+            setAddress: false,
+        });
     }
 
     toAddress = () => {
-        this.setState({ backHome: false,
-        writePost: false,
-        setPrivacy: false,
-        setPhoto: false,
-        setEmoji: false,
-        setAddress: true, });
+        this.setState({
+            checkImg: false,
+            backHome: false,
+            writePost: false,
+            setPrivacy: false,
+            setPhoto: false,
+            setEmoji: false,
+            setAddress: true,
+        });
     }
 
     setPrivate = () => {
-        this.setState({ privacy: 'Private', 
-        writePost: true,
-        setPrivacy: false,});
+        this.setState({
+            privacy: 'Private',
+            writePost: true,
+            setPrivacy: false,
+        });
     }
 
     setPublic = () => {
-        this.setState({ privacy: 'Public', 
-        writePost: true,
-        setPrivacy: false,});
+        this.setState({
+            privacy: 'Public',
+            writePost: true,
+            setPrivacy: false,
+        });
     }
 
-    setPhotoUrl = (url) =>{
+    setPhotoUrl = (url) => {
         this.setState({
-        photo_url: url,
-        writePost: true,
-        setPhoto: false,});
+            photo_url: url,
+            writePost: true,
+            setPhoto: false,
+        });
     }
 
-    choseEmoji = (emoji) =>{
+    choseEmoji = (emoji) => {
         this.setState({
-        emoji: emoji,
-        writePost: true,
-        setEmoji: false,});
+            emoji: emoji,
+            writePost: true,
+            setEmoji: false,
+        });
     }
-    componentDidMount(){
+    componentDidMount() {
     }
 
     render() {
+        console.log(this.state);
         let showPage = <WritePost
-            privacy = {this.state.privacy}
+            privacy={this.state.privacy}
+            setImg = {this.setImg.bind(this)}
+            emoji={this.state.emoji}
             photo_url = {this.state.photo_url}
-            emoji = {this.state.emoji}
             toPrivacy={this.toPrivacy.bind(this)}
-            toPhoto={this.toPhoto.bind(this)}
-            toEmoji={this.toEmoji.bind(this)}/>;
+            toImage = {this.toImage.bind(this)}
+            toEmoji={this.toEmoji.bind(this)} />;
         if (this.state.setPrivacy) {
             showPage = <Privacy
-            setPrivate={this.setPrivate.bind(this)}
-            setPublic={this.setPublic.bind(this)}              
-            toWrite={this.toWrite.bind(this)}/>
-        }else if(this.state.setPhoto){
+                setPrivate={this.setPrivate.bind(this)}
+                setPublic={this.setPublic.bind(this)}
+                toWrite={this.toWrite.bind(this)} />
+        } else if (this.state.setPhoto) {
             showPage = <Photo
-            setPhotoUrl={this.setPhotoUrl.bind(this)}
-            toWrite={this.toWrite.bind(this)}/>
-        }else if (this.state.setEmoji){
+                setPhotoUrl={this.setPhotoUrl.bind(this)}
+                toWrite={this.toWrite.bind(this)} />
+        } else if (this.state.setEmoji) {
             showPage = <Emoji
-            choseEmoji={this.choseEmoji.bind(this)}
-            toWrite={this.toWrite.bind(this)}/>
-        }else if (this.state.setAddress){
+                choseEmoji={this.choseEmoji.bind(this)}
+                toWrite={this.toWrite.bind(this)} />
+        } else if (this.state.setAddress) {
 
+        } else if (this.state.checkImg) {
+            showPage = <Img
+                img = {this.state.photo_url}
+                toWrite={this.toWrite.bind(this)}
+            />
         }
         return (
             <div>

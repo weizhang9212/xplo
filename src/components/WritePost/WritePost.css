@@ -100,3 +100,12 @@ font-style: normal;
 font-weight: normal;
 src: local('Proxima Nova Alt Light'), url('Mark Simonson - Proxima Nova Alt Light.woff') format('woff');
 }
+
+.inputFile{
+width: 0.1px;
+height: 0.1px;
+opacity: 0;
+overflow: hidden;
+position: absolute;
+z-index: -1;
+}
