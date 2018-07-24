@@ -43,7 +43,8 @@ class PageWrapper extends Component {
                     <Route path="/post/:id" exact component={FullPost} />
                     <Route path="/map/:id" exact component={MapContainer} />
                     <Route path="/post/:id/image" component = {PostImage}/>
-                    <Route path="/writePost/:id" component = {WritePost}/>
+                    <Route path="/writePost/:id" exact component = {WritePost}/>
+                    <Route path='/writePostPic/:id' exact component = {WritePost}/>
                     <Route path='/'
                     render={() => (
                         this.state.logIn ? (
