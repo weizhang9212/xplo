@@ -6,7 +6,7 @@ import Privacy from './Privacy'
 import Photo from './Photo'
 import Emoji from './Emoji'
 import Img from './FullImage'
-
+import Address from './Address'
 
 class WriteIndex extends Component {
     state = {
@@ -20,6 +20,7 @@ class WriteIndex extends Component {
         privacy: 'Public',
         photo_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3DyJgSZ9l-M88a6vhh-ZzXWPGcsqTYpuWelSWOvWi-nm98Jpn",
         emoji: 0x1F600,
+        description: '',
     }
 
     setImg = (url) =>{
@@ -28,8 +29,9 @@ class WriteIndex extends Component {
         })
     }
 
-    toImage = () => {
+    toImage = (description) => {
         this.setState({
+            description: description,
             checkImg: true,
             backHome: false,
             setPhoto: false,
@@ -52,8 +54,9 @@ class WriteIndex extends Component {
         });
     }
 
-    toPrivacy = () => {
+    toPrivacy = (description) => {
         this.setState({
+            description: description,
             checkImg: false,
             backHome: false,
             writePost: false,
@@ -76,20 +79,10 @@ class WriteIndex extends Component {
         });
     }
 
-    toPhoto = () => {
-        this.setState({
-            checkImg: false,
-            backHome: false,
-            writePost: false,
-            setPrivacy: false,
-            setPhoto: true,
-            setEmoji: false,
-            setAddress: false,
-        });
-    }
 
-    toEmoji = () => {
+    toEmoji = (description) => {
         this.setState({
+            description: description,
             checkImg: false,
             backHome: false,
             writePost: false,
@@ -100,8 +93,9 @@ class WriteIndex extends Component {
         });
     }
 
-    toAddress = () => {
+    toAddress = (description) => {
         this.setState({
+            description: description,
             checkImg: false,
             backHome: false,
             writePost: false,
@@ -149,13 +143,16 @@ class WriteIndex extends Component {
     render() {
         console.log(this.state);
         let showPage = <WritePost
+            description = {this.state.description}
             privacy={this.state.privacy}
             setImg = {this.setImg.bind(this)}
             emoji={this.state.emoji}
             photo_url = {this.state.photo_url}
             toPrivacy={this.toPrivacy.bind(this)}
             toImage = {this.toImage.bind(this)}
+            toAddress={this.toAddress.bind(this)}
             toEmoji={this.toEmoji.bind(this)} />;
+
         if (this.state.setPrivacy) {
             showPage = <Privacy
                 setPrivate={this.setPrivate.bind(this)}
@@ -170,7 +167,9 @@ class WriteIndex extends Component {
                 choseEmoji={this.choseEmoji.bind(this)}
                 toWrite={this.toWrite.bind(this)} />
         } else if (this.state.setAddress) {
+            showPage = <Address
 
+            toWrite={this.toWrite.bind(this)}/>
         } else if (this.state.checkImg) {
             showPage = <Img
                 img = {this.state.photo_url}

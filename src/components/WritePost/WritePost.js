@@ -17,9 +17,12 @@ export default class WritePost extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
-
+	componentDidMount() {
+    	this.setState({ value: this.props.description })
+  	}
 	handleChange(event) {
 		this.setState({ value: event.target.value });
+
 	}
 
 	handleSubmit(event) {
@@ -104,7 +107,7 @@ export default class WritePost extends Component {
 						value={this.state.value} onChange={this.handleChange}>
 					</textarea>
 					<div className="SubContent">
-						<div className="Privacy" onClick={this.props.toPrivacy}>
+						<div className="Privacy" onClick={()=>this.props.toPrivacy(this.state.value)}>
 							<span style={{ fontFamily: 'Proxima Nova Alt Light', fontSize: 16, marginLeft: '6%', marginTop: '3%' }} > Privacy </span>
 							<span style={{ fontFamily: 'Proxima Nova Alt Light', fontSize: 16, marginLeft: '62%', marginTop: '3%' }} > {this.props.privacy} </span>
 							<i style={{ paddingTop: '2.5%' }} className="material-icons">keyboard_arrow_right</i>
@@ -118,19 +121,19 @@ export default class WritePost extends Component {
 								<label for="file">Choose Photo
 							   </label><br />
 							</span>
-							<img id="ChosenImg" src={this.props.photo_url} onClick={this.props.toImage} />
+							<img id="ChosenImg" src={this.props.photo_url} onClick={()=>this.props.toImage(this.state.value)} />
 						</div>
 						<Divider />
-						<div className="Emoji" onClick={this.props.toEmoji}>
+						<div className="Emoji" onClick={()=>this.props.toEmoji(this.state.value)}>
 							<span style={{ fontFamily: 'Proxima Nova Alt Light', fontSize: 16, marginLeft: '6%', marginTop: '3%' }} > Emoji <br /></span>
 							<span style={{ fontFamily: 'Proxima Nova Alt Light', fontSize: 16, marginLeft: '70%', marginTop: '2%' }} > {String.fromCodePoint(this.props.emoji)} </span>
 							<i style={{ paddingTop: '2.5%' }} className="material-icons">keyboard_arrow_right</i>
 						</div>
 						<Divider />
-						<div className="Address">
-							<span style={{ fontFamily: 'Proxima Nova Alt Light', fontSize: 16, marginLeft: '6%', marginTop: '3%' }} > Address <br /></span>
-							<i style={{ paddingTop: '2.5%', marginLeft: '70%' }} className="material-icons">keyboard_arrow_right</i>
-						</div>
+						<div className = "Address" onClick = {()=>this.props.toAddress(this.state.value)}>
+	               			<span style={{fontFamily: 'Proxima Nova Alt Light', fontSize: 16, marginLeft: '6%', marginTop: '3%'}} > Address <br/></span> 
+	               			<i style={{paddingTop: '2.5%', marginLeft: '70%'}} className="material-icons">keyboard_arrow_right</i>
+	               		</div>
 					</div>
 				</div>
 			</div>
